@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black-forest-500);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sunlit-clay-500);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sunlit-clay-600);
+}
+
+/* Palette variables */
+:root{
+  --olive-leaf: #606c38;
+  --olive-leaf-100: #13160b;
+  --olive-leaf-200: #262b16;
+  --olive-leaf-300: #394121;
+  --olive-leaf-400: #4c562c;
+  --olive-leaf-500: #606c38;
+  --olive-leaf-600: #88994f;
+  --olive-leaf-700: #a9b876;
+  --olive-leaf-800: #c5d0a3;
+  --olive-leaf-900: #e2e7d1;
+  
+  --black-forest: #283618;
+  --black-forest-100: #080b05;
+  --black-forest-200: #101509;
+  --black-forest-300: #18200e;
+  --black-forest-400: #1f2a13;
+  --black-forest-500: #283618;
+  --black-forest-600: #547133;
+  --black-forest-700: #80ac4d;
+  --black-forest-800: #aac987;
+  --black-forest-900: #d5e4c3;
+  
+  --cornsilk: #fefae0;
+  --cornsilk-100: #5d5103;
+  --cornsilk-200: #baa206;
+  --cornsilk-300: #f8dc27;
+  --cornsilk-400: #fbeb84;
+  --cornsilk-500: #fefae0;
+  --cornsilk-600: #fefbe7;
+  --cornsilk-700: #fefced;
+  --cornsilk-800: #fffdf3;
+  --cornsilk-900: #fffef9;
+  
+  --sunlit-clay: #dda15e;
+  --sunlit-clay-100: #34210b;
+  --sunlit-clay-200: #684216;
+  --sunlit-clay-300: #9d6321;
+  --sunlit-clay-400: #d1842c;
+  --sunlit-clay-500: #dda15e;
+  --sunlit-clay-600: #e4b57f;
+  --sunlit-clay-700: #ebc79f;
+  --sunlit-clay-800: #f1dabf;
+  --sunlit-clay-900: #f8ecdf;
+  
+  --copperwood: #bc6c25;
+  --copperwood-100: #251507;
+  --copperwood-200: #4b2b0f;
+  --copperwood-300: #704016;
+  --copperwood-400: #96561e;
+  --copperwood-500: #bc6c25;
+  --copperwood-600: #d98840;
+  --copperwood-700: #e3a570;
+  --copperwood-800: #ecc3a0;
+  --copperwood-900: #f6e1cf;
+}
+
+/* Global layout tweaks */
+html, body, #__next {
+  height: 100%;
+  background-color: var(--black-forest-500);
+  color: var(--cornsilk-500);
+}
+
+/* Reusable CTA classes */
+.btn-mint {
+  @apply inline-block px-5 py-3 rounded-lg font-medium shadow-lg transition-all duration-300;
+  background: linear-gradient(90deg, var(--sunlit-clay-500), var(--copperwood-500));
+  color: var(--black-forest-500);
+  transform: translateY(0);
+}
+
+.btn-mint:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(221, 161, 94, 0.3);
+}
+
+.btn-outline-mint {
+  @apply inline-block px-5 py-3 rounded-lg border transition-all duration-300;
+  border-color: rgba(221, 161, 94, 0.18);
+  color: var(--sunlit-clay-500);
+  background: transparent;
+  transform: translateY(0);
+}
+
+.btn-outline-mint:hover {
+  transform: translateY(-2px);
+  border-color: var(--sunlit-clay-500);
+  background: rgba(221, 161, 94, 0.1);
+  box-shadow: 0 8px 20px rgba(221, 161, 94, 0.15);
+}
+
+/* Card glass */
+.card-glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  transition: all 0.3s ease;
+}
+
+.card-glass:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(221, 161, 94, 0.2);
+  border-color: rgba(221, 161, 94, 0.2);
+}
+
+/* Focus accessibility */
+:where(button,a,input,textarea):focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(221, 161, 94, 0.12);
+  border-radius: 6px;
+}
+
+/* Utility tweaks */
+a { 
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gradient text animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
