@@ -164,6 +164,9 @@ export default function About(): JSX.Element {
         // Added per your request:
         { name: "Figma", icon: "https://cdn.simpleicons.org/figma/000000" },
         { name: "Trello", icon: "https://cdn.simpleicons.org/trello/0079BF" },
+        { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase/3ECF8E" },
+        { name: "Postman", icon: "https://cdn.simpleicons.org/postman/FF6C37" },
+        { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase/FFCA28" }
       ],
     },
     {
