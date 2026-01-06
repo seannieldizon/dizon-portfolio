@@ -2,8 +2,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function Hero() {
+export default function Hero(): JSX.Element {
   const [imageError, setImageError] = useState(false);
+
+  // single easing value used across animations (typed as const)
+  const easeSmooth = [0.25, 0.46, 0.45, 0.94] as const;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -23,7 +26,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
+        ease: easeSmooth,
       },
     },
   };
@@ -50,7 +53,7 @@ export default function Hero() {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: easeSmooth,
           }}
         />
         <motion.div
@@ -64,7 +67,7 @@ export default function Hero() {
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: easeSmooth,
           }}
         />
       </div>
@@ -87,7 +90,7 @@ export default function Hero() {
               className="flex-shrink-0"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: easeSmooth }}
             >
               <motion.div
                 className="relative"
@@ -118,9 +121,7 @@ export default function Hero() {
                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        <p className="text-xs font-medium">
-                          Add your formal photo
-                        </p>
+                        <p className="text-xs font-medium">Add your formal photo</p>
                         <p className="text-xs mt-1 text-sunlit-clay-500/70">
                           /public/formal-photo.jpg
                         </p>
@@ -139,7 +140,7 @@ export default function Hero() {
                   transition={{
                     duration: 3,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    ease: easeSmooth,
                   }}
                 />
               </motion.div>
@@ -151,7 +152,7 @@ export default function Hero() {
                 className="text-4xl md:text-6xl font-extrabold leading-tight text-sunlit-clay-500"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: easeSmooth }}
               >
                 <motion.span
                   className="inline-block"
@@ -166,7 +167,7 @@ export default function Hero() {
                 className="mt-4 text-gray-300 text-lg max-w-2xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: easeSmooth }}
               >
                 Graduating BS Information Technology • Aspiring Full-Stack &
                 Systems Engineer.
@@ -176,7 +177,7 @@ export default function Hero() {
                 className="mt-6 flex flex-wrap gap-4 justify-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
+                transition={{ duration: 0.8, delay: 0.7, ease: easeSmooth }}
               >
                 <motion.a
                   href="#projects"
@@ -204,7 +205,7 @@ export default function Hero() {
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            transition={{ duration: 0.8, delay: 0.9 }}
+            transition={{ duration: 0.8, delay: 0.9, ease: easeSmooth }}
           >
             <motion.div
               className="card-glass rounded-xl p-6 max-w-2xl w-full"
@@ -223,7 +224,7 @@ export default function Hero() {
                   className="absolute inset-0 w-full h-full object-cover"
                   initial={{ scale: 1.05 }}
                   whileHover={{ scale: 1.12 }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.6, ease: easeSmooth }}
                 />
 
                 {/* Dark gradient overlay */}
@@ -241,7 +242,7 @@ export default function Hero() {
                     duration: 3,
                     repeat: Infinity,
                     repeatDelay: 2,
-                    ease: "easeInOut",
+                    ease: easeSmooth,
                   }}
                 />
 
@@ -251,7 +252,7 @@ export default function Hero() {
                     className="text-xs uppercase tracking-widest text-mint-200 mb-1"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
+                    transition={{ delay: 1, ease: easeSmooth }}
                   >
                     Featured Project
                   </motion.p>
@@ -260,7 +261,7 @@ export default function Hero() {
                     className="text-xl font-semibold text-white"
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1 }}
+                    transition={{ delay: 1.1, ease: easeSmooth }}
                   >
                     Faculty Management System
                   </motion.h3>
@@ -269,7 +270,7 @@ export default function Hero() {
                     className="mt-1 text-sm text-gray-300 max-w-md mx-auto text-center"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2 }}
+                    transition={{ delay: 1.2, ease: easeSmooth }}
                   >
                     Role-based faculty records, approvals, and admin dashboards
                     built with modern web tech.

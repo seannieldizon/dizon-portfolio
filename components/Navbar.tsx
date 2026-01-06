@@ -32,7 +32,6 @@ export default function Navbar() {
    */
   const scrollToElement = (el: HTMLElement | null) => {
     if (!el) return;
-    // compute header height from DOM (works even if motion ref isn't set)
     const headerEl = document.querySelector("header");
     const headerHeight = headerEl?.getBoundingClientRect().height ?? 0;
     const rect = el.getBoundingClientRect();
@@ -42,8 +41,6 @@ export default function Navbar() {
 
   /**
    * Smooth-scrolling handler for internal links.
-   * Prevents the default jump, accounts for the fixed header height,
-   * performs smooth scroll, and closes the mobile menu if open.
    */
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement> | undefined, href: string) => {
     if (e) e.preventDefault();
@@ -52,7 +49,6 @@ export default function Navbar() {
     const el = document.getElementById(id);
 
     if (!el) {
-      // fallback to changing the hash (so browser history still works)
       if (typeof window !== "undefined") {
         window.location.hash = href;
       }
@@ -60,12 +56,8 @@ export default function Navbar() {
       return;
     }
 
-    // If the mobile menu is open, close it first and wait for the collapse animation to finish
-    // (the menu uses a 0.25s animate/exit in the component). Waiting prevents layout shift
-    // that would make the scroll target wrong on mobile.
     if (open) {
       setOpen(false);
-      // match a bit more than animation duration for safety
       setTimeout(() => scrollToElement(el), 260);
     } else {
       scrollToElement(el);
@@ -102,7 +94,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-gray-300 hover:text-sunlit-clay-500 relative transition-colors duration-200"
+              className="text-gray-300 hover:text-sunlit-clay-500 relative transition-colors duration-200 group"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 + 0.3 }}
@@ -113,16 +105,19 @@ export default function Navbar() {
             </motion.a>
           ))}
 
+          {/* Home (replaced Resume) — targets the hero with id="home" */}
           <motion.a
-            href="/resume.pdf"
-            className="ml-2 px-3 py-1 border border-white/20 rounded hover:bg-sunlit-clay-500/10 hover:border-sunlit-clay-500/50 transition-all duration-200"
+            href="#home"
+            className="ml-2 px-3 py-1 border border-white/20 rounded hover:bg-sunlit-clay-500/10 hover:border-sunlit-clay-500/50 transition-all duration-200 group"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={(e) => handleNavClick(e, "#home")}
           >
-            Resume
+            Home
+            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-sunlit-clay-500 group-hover:w-full transition-all duration-300" />
           </motion.a>
         </nav>
 
@@ -174,15 +169,17 @@ export default function Navbar() {
                 </motion.a>
               ))}
 
+              {/* mobile Home button */}
               <motion.a
-                href="/resume.pdf"
+                href="#home"
                 className="mt-2 inline-block px-4 py-2 border rounded hover:bg-sunlit-clay-500/10 hover:border-sunlit-clay-500/50 transition-all"
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 whileHover={{ scale: 1.02 }}
+                onClick={(e) => handleNavClick(e, "#home")}
               >
-                Download Resume
+                Home
               </motion.a>
             </motion.div>
           </motion.div>
