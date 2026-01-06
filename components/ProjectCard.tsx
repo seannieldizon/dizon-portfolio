@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     <>
       <motion.article
         className="bg-gradient-to-br from-slate-800/60 to-slate-900/60 border border-white/5 rounded-xl p-5 shadow-lg cursor-pointer group"
-        whileHover={{ 
+        whileHover={{
           scale: 1.02,
           borderColor: "rgba(221, 161, 94, 0.3)",
           boxShadow: "0 20px 40px rgba(221, 161, 94, 0.1)"
@@ -37,6 +37,14 @@ export default function ProjectCard({ project }: { project: Project }) {
             >
               {project.title}
             </motion.h3>
+
+            {/* Client badge: placed directly under the title */}
+            {project.client && (
+              <span className="inline-block text-xs font-semibold mt-2 px-2 py-1 rounded bg-slate-700/50 text-gray-200">
+                Client: {project.client}
+              </span>
+            )}
+
             <p className="mt-2 text-sm text-gray-300">{project.short}</p>
 
             <div className="mt-3 flex flex-wrap gap-2">
