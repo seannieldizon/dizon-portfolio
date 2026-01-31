@@ -129,6 +129,7 @@ export default function About(): JSX.Element {
         },
         { name: "Express", icon: "https://cdn.simpleicons.org/express/000000" },
         { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
+        { name: "Redis", icon: "https://cdn.simpleicons.org/redis/DC382D" },
       ],
     },
     {
@@ -161,7 +162,7 @@ export default function About(): JSX.Element {
         { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
         { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
         { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
-        // Added per your request:
+        { name: "MySQL Workbench", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
         { name: "Figma", icon: "https://cdn.simpleicons.org/figma/000000" },
         { name: "Trello", icon: "https://cdn.simpleicons.org/trello/0079BF" },
         { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase/3ECF8E" },
@@ -216,6 +217,7 @@ export default function About(): JSX.Element {
       id="about"
       className="py-28 text-white relative overflow-hidden"
       style={{ backgroundColor: "#283618" }}
+      aria-labelledby="about-heading"
     >
       {/* decorative blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -228,16 +230,13 @@ export default function About(): JSX.Element {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.h2
-          className="text-3xl md:text-4xl font-extrabold mb-8"
+        <h2
+          id="about-heading"
+          className="text-3xl md:text-4xl font-extrabold mb-8 font-display"
           style={{ color: frosted }}
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
           About Me
-        </motion.h2>
+        </h2>
 
         {/* mobile primary visual */}
         <Reveal delay={0.12}>
@@ -269,40 +268,28 @@ export default function About(): JSX.Element {
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-8 md:gap-10 items-start">
-          <div className="md:col-span-2 text-gray-200 leading-relaxed h-full flex flex-col">
+          <article className="md:col-span-2 text-gray-200 leading-relaxed h-full flex flex-col">
             <div>
               <Reveal delay={0.05}>
-                <motion.p
-                  className="mb-4 text-lg md:text-base"
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
+                <p className="mb-4 text-lg md:text-base">
                   I am <strong>Sean Niel S. Dizon</strong>, a graduating
                   Bachelor of Science in Information Technology student at{" "}
-                  <motion.span
-                    className="font-medium"
-                    style={{ color: frosted }}
-                    whileHover={{ scale: 1.02 }}
-                  >
+                  <span className="font-medium" style={{ color: frosted }}>
                     Camarines Norte State College
-                  </motion.span>{" "}
+                  </span>{" "}
                   (expected 2026). I build practical web applications and
                   embedded prototypes that connect software and hardware.
-                </motion.p>
+                </p>
               </Reveal>
 
               <Reveal delay={0.08}>
-                <motion.p
-                  className="mb-6 text-base text-gray-300"
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
+                <p className="mb-6 text-base text-gray-300">
                   My work focuses on full-stack web development, systems
                   integration, and small-scale IoT solutions. I enjoy
                   translating requirements into reliable interfaces and
                   maintainable backends, delivering working prototypes that
                   solve real problems.
-                </motion.p>
+                </p>
               </Reveal>
 
               {/* Technical skills */}
@@ -361,7 +348,7 @@ export default function About(): JSX.Element {
                 </div>
               </Reveal>
             </div>
-          </div>
+          </article>
 
           <div className="md:col-span-1">
             <Reveal delay={0.18}>

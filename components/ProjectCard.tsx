@@ -1,10 +1,38 @@
 // components/ProjectCard.tsx
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import type { Project } from "../data/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) setOpen(false);
+    };
+    if (open) {
+      window.addEventListener("keydown", handleEscape);
+      // Focus trap: focus close button when modal opens
+      setTimeout(() => closeButtonRef.current?.focus(), 100);
+    }
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [open]);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [open]);
 
   return (
     <>
@@ -19,24 +47,29 @@ export default function ProjectCard({ project }: { project: Project }) {
       >
         <div className="flex items-start gap-4">
           <motion.div
-            className="w-20 h-20 flex-none rounded-lg overflow-hidden bg-slate-700 flex items-center justify-center text-gray-200"
+            className="w-20 h-20 flex-none rounded-lg overflow-hidden bg-slate-700 flex items-center justify-center text-gray-200 relative"
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ duration: 0.3 }}
+            aria-hidden="true"
           >
             {project.image ? (
-              <img src={project.image} alt={project.title} className="object-cover w-full h-full" />
+              <Image
+                src={project.image}
+                alt=""
+                width={80}
+                height={80}
+                className="object-cover w-full h-full"
+                loading="lazy"
+              />
             ) : (
               <div className="text-sm text-center px-2">{project.title}</div>
             )}
           </motion.div>
 
           <div className="flex-1">
-            <motion.h3
-              className="text-lg font-semibold text-white group-hover:text-sunlit-clay-500 transition-colors"
-              whileHover={{ x: 5 }}
-            >
+            <h3 className="text-lg font-semibold text-white group-hover:text-primary-400 transition-colors">
               {project.title}
-            </motion.h3>
+            </h3>
 
             {/* Client badge: placed directly under the title */}
             {project.client && (
@@ -68,27 +101,29 @@ export default function ProjectCard({ project }: { project: Project }) {
             </div>
 
             <div className="mt-4 flex gap-3">
-              {project.repo ? (
+              {project.repo && project.repo !== "Private (available on request)" ? (
                 <motion.a
                   href={project.repo}
                   target="_blank"
-                  rel="noreferrer"
-                  className="text-sm px-3 py-2 rounded bg-sunlit-clay-500/10 text-sunlit-clay-600 hover:bg-sunlit-clay-500/20 transition-colors"
+                  rel="noreferrer noopener"
+                  className="text-sm px-3 py-2 rounded bg-primary-400/10 text-primary-600 hover:bg-primary-400/20 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                   whileHover={{ scale: 1.05, x: 2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`View ${project.title} repository`}
                 >
                   View Repo
                 </motion.a>
               ) : null}
 
-              {project.demo ? (
+              {project.demo && project.demo !== "#" ? (
                 <motion.a
                   href={project.demo}
                   target="_blank"
-                  rel="noreferrer"
-                  className="text-sm px-3 py-2 rounded border border-white/5 hover:bg-white/5 hover:border-sunlit-clay-500/30 transition-colors"
+                  rel="noreferrer noopener"
+                  className="text-sm px-3 py-2 rounded border border-white/5 hover:bg-white/5 hover:border-primary-400/30 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-slate-800"
                   whileHover={{ scale: 1.05, x: 2 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`View ${project.title} live demo`}
                 >
                   Live Demo
                 </motion.a>
@@ -96,9 +131,10 @@ export default function ProjectCard({ project }: { project: Project }) {
 
               <motion.button
                 onClick={() => setOpen(true)}
-                className="ml-auto text-sm px-3 py-2 rounded bg-sunlit-clay-500 text-black-forest-500 font-medium"
+                className="ml-auto text-sm px-3 py-2 rounded bg-primary-400 text-neutral-900 font-medium focus:outline-none focus:ring-4 focus:ring-primary-400/50"
                 whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(221, 161, 94, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
+                aria-label={`View details for ${project.title}`}
               >
                 Details
               </motion.button>
@@ -116,6 +152,10 @@ export default function ProjectCard({ project }: { project: Project }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
+              aria-describedby="project-modal-description"
             >
               <motion.div
                 className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -123,9 +163,11 @@ export default function ProjectCard({ project }: { project: Project }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                aria-hidden="true"
               />
               <motion.div
-                className="relative z-10 max-w-3xl w-full bg-slate-900 rounded-xl p-6 border border-white/10 shadow-2xl"
+                ref={modalRef}
+                className="relative z-10 max-w-3xl w-full bg-slate-900 rounded-xl p-6 border border-white/10 shadow-2xl max-h-[90vh] overflow-y-auto"
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -133,22 +175,18 @@ export default function ProjectCard({ project }: { project: Project }) {
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-1">
-                    <motion.h3
+                    <h3
+                      id="project-modal-title"
                       className="text-xl font-bold text-white mb-2"
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
                     >
                       {project.title}
-                    </motion.h3>
-                    <motion.p
+                    </h3>
+                    <p
+                      id="project-modal-description"
                       className="mt-2 text-gray-300"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
                     >
                       {project.detailed || project.short}
-                    </motion.p>
+                    </p>
 
                     <motion.div
                       className="mt-4 flex flex-wrap gap-2"
@@ -176,35 +214,39 @@ export default function ProjectCard({ project }: { project: Project }) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
                     >
-                      {project.repo && (
+                      {project.repo && project.repo !== "Private (available on request)" && (
                         <motion.a
                           href={project.repo}
                           target="_blank"
-                          rel="noreferrer"
-                          className="px-4 py-2 bg-sunlit-clay-500 text-black-forest-500 rounded font-medium"
+                          rel="noreferrer noopener"
+                          className="px-4 py-2 bg-primary-400 text-neutral-900 rounded font-medium focus:outline-none focus:ring-4 focus:ring-primary-400/50"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
+                          aria-label={`View ${project.title} repository`}
                         >
                           View Repo
                         </motion.a>
                       )}
-                      {project.demo && (
+                      {project.demo && project.demo !== "#" && (
                         <motion.a
                           href={project.demo}
                           target="_blank"
-                          rel="noreferrer"
-                          className="px-4 py-2 border border-white/10 rounded hover:bg-white/5 transition-colors"
+                          rel="noreferrer noopener"
+                          className="px-4 py-2 border border-white/10 rounded hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
+                          aria-label={`View ${project.title} live demo`}
                         >
                           Live Demo
                         </motion.a>
                       )}
                       <motion.button
+                        ref={closeButtonRef}
                         onClick={() => setOpen(false)}
-                        className="ml-auto px-4 py-2 bg-white/5 rounded hover:bg-white/10 transition-colors"
+                        className="ml-auto px-4 py-2 bg-white/5 rounded hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        aria-label="Close project details"
                       >
                         Close
                       </motion.button>
@@ -212,14 +254,17 @@ export default function ProjectCard({ project }: { project: Project }) {
                   </div>
 
                   {project.image && (
-                    <motion.div
-                      className="w-40 hidden md:block"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      <img src={project.image} alt={project.title} className="object-cover w-full h-28 rounded" />
-                    </motion.div>
+                    <div className="w-40 hidden md:block relative h-28">
+                      <Image
+                        src={project.image}
+                        alt=""
+                        fill
+                        className="object-cover rounded"
+                        sizes="160px"
+                        loading="lazy"
+                        aria-hidden="true"
+                      />
+                    </div>
                   )}
                 </div>
               </motion.div>

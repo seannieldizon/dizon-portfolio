@@ -11,6 +11,12 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [emailAnimation, setEmailAnimation] = useState<any | null>(null);
 
+  // Form validation errors
+  const [errors, setErrors] = useState<{
+    email?: string;
+    message?: string;
+  }>({});
+
   // modal state
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
@@ -18,6 +24,9 @@ export default function Contact() {
   const [modalType, setModalType] = useState<"success" | "error" | "warning">("success");
 
   const modalCloseRef = useRef<HTMLButtonElement | null>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     // load Email.json exactly as requested
@@ -53,11 +62,48 @@ export default function Contact() {
     },
   };
 
+  // Client-side validation
+  const validateForm = (): boolean => {
+    const newErrors: typeof errors = {};
+    let isValid = true;
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email address";
+      isValid = false;
+    }
+
+    // Message validation
+    if (!message) {
+      newErrors.message = "Message is required";
+      isValid = false;
+    } else if (message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!email || !message) {
-      openModal("warning", "Missing fields", "Please include your email and a short message before sending.");
+    // Clear previous errors
+    setErrors({});
+
+    // Validate form
+    if (!validateForm()) {
+      // Focus first error field
+      if (errors.email) {
+        emailInputRef.current?.focus();
+      } else if (errors.message) {
+        messageInputRef.current?.focus();
+      }
       return;
     }
 
@@ -160,19 +206,102 @@ export default function Contact() {
           </aside>
 
           {/* FORM */}
-          <motion.form onSubmit={onSubmit} className="space-y-4" initial="hidden" whileInView="visible" viewport={{ once: true }}>
-            <motion.input variants={inputVariants} className="w-full bg-slate-900 border border-white/5 rounded px-4 py-3 text-sm focus:ring-2 focus:ring-[#52b788]/30 outline-none" placeholder="Your name (optional)" value={name} onChange={(e) => setName(e.target.value)} />
+          <motion.form
+            onSubmit={onSubmit}
+            className="space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            noValidate
+            aria-label="Contact form"
+          >
+            <motion.div variants={inputVariants}>
+              <label htmlFor="contact-name" className="sr-only">
+                Your name (optional)
+              </label>
+              <input
+                id="contact-name"
+                ref={nameInputRef}
+                type="text"
+                className="w-full bg-slate-900 border border-white/5 rounded px-4 py-3 text-sm focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400/50 outline-none transition-colors"
+                placeholder="Your name (optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                aria-label="Your name (optional)"
+              />
+            </motion.div>
 
-            <motion.input variants={inputVariants} type="email" required className="w-full bg-slate-900 border border-white/5 rounded px-4 py-3 text-sm focus:ring-2 focus:ring-[#52b788]/30 outline-none" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <motion.div variants={inputVariants}>
+              <label htmlFor="contact-email" className="sr-only">
+                Email address (required)
+              </label>
+              <input
+                id="contact-email"
+                ref={emailInputRef}
+                type="email"
+                required
+                className={`w-full bg-slate-900 border rounded px-4 py-3 text-sm focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400/50 outline-none transition-colors ${
+                  errors.email ? "border-red-500/50 focus:ring-red-500/50" : "border-white/5"
+                }`}
+                placeholder="Email *"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (errors.email) {
+                    setErrors((prev) => ({ ...prev, email: undefined }));
+                  }
+                }}
+                aria-label="Email address (required)"
+                aria-required="true"
+                aria-invalid={errors.email ? "true" : "false"}
+                aria-describedby={errors.email ? "email-error" : undefined}
+              />
+              {errors.email && (
+                <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {errors.email}
+                </p>
+              )}
+            </motion.div>
 
-            <motion.textarea variants={inputVariants} required className="w-full bg-slate-900 border border-white/5 rounded px-4 py-3 text-sm h-36 resize-none focus:ring-2 focus:ring-[#52b788]/30 outline-none" placeholder="Message" value={message} onChange={(e) => setMessage(e.target.value)} />
+            <motion.div variants={inputVariants}>
+              <label htmlFor="contact-message" className="sr-only">
+                Message (required)
+              </label>
+              <textarea
+                id="contact-message"
+                ref={messageInputRef}
+                required
+                className={`w-full bg-slate-900 border rounded px-4 py-3 text-sm h-36 resize-none focus:ring-2 focus:ring-primary-400/50 focus:border-primary-400/50 outline-none transition-colors ${
+                  errors.message ? "border-red-500/50 focus:ring-red-500/50" : "border-white/5"
+                }`}
+                placeholder="Message *"
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  if (errors.message) {
+                    setErrors((prev) => ({ ...prev, message: undefined }));
+                  }
+                }}
+                aria-label="Message (required)"
+                aria-required="true"
+                aria-invalid={errors.message ? "true" : "false"}
+                aria-describedby={errors.message ? "message-error" : undefined}
+              />
+              {errors.message && (
+                <p id="message-error" className="mt-1 text-sm text-red-400" role="alert">
+                  {errors.message}
+                </p>
+              )}
+            </motion.div>
 
             <motion.button
               type="submit"
-              className={`w-full py-3 rounded font-medium shadow-lg bg-gradient-to-r from-[#74c69d] to-[#52b788] text-black focus:outline-none focus:ring-4 focus:ring-[#52b788]/30 disabled:opacity-60 disabled:cursor-not-allowed`}
+              className={`w-full py-3 rounded font-medium shadow-lg bg-gradient-to-r from-primary-300 to-primary-500 text-neutral-900 focus:outline-none focus:ring-4 focus:ring-primary-400/50 disabled:opacity-60 disabled:cursor-not-allowed transition-opacity`}
               whileHover={{ scale: sending ? 1 : 1.04 }}
               whileTap={{ scale: sending ? 1 : 0.96 }}
               disabled={sending}
+              aria-busy={sending}
+              aria-label={sending ? "Sending message..." : "Send message"}
             >
               {sending ? (
                 <span className="inline-flex items-center justify-center gap-2 text-sm">
@@ -192,9 +321,22 @@ export default function Contact() {
 
       {/* Modal (portal-like positioned inside component) */}
       {modalOpen && (
-        <div aria-modal="true" role="dialog" className="fixed inset-0 z-50 flex items-center justify-center px-4">
+        <div
+          aria-modal="true"
+          role="dialog"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-message"
+          className="fixed inset-0 z-50 flex items-center justify-center px-4"
+        >
           {/* backdrop */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.6 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black"></motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black"
+            onClick={closeModal}
+            aria-hidden="true"
+          />
 
           {/* modal panel */}
           <motion.div
@@ -204,7 +346,6 @@ export default function Contact() {
             transition={{ duration: 0.16 }}
             className="relative z-50 max-w-xl w-full rounded-2xl bg-white/6 backdrop-blur p-6 border border-white/6 shadow-2xl"
             role="document"
-            aria-labelledby="modal-title"
           >
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
@@ -215,15 +356,18 @@ export default function Contact() {
                 <h3 id="modal-title" className="text-lg font-semibold text-white">
                   {modalTitle}
                 </h3>
-                <p className="mt-2 text-sm text-gray-200 whitespace-pre-wrap">{modalMessage}</p>
+                <p id="modal-message" className="mt-2 text-sm text-gray-200 whitespace-pre-wrap" role="status">
+                  {modalMessage}
+                </p>
               </div>
             </div>
 
             <div className="mt-6 flex justify-end gap-3">
               <button
                 ref={modalCloseRef}
-                className="px-4 py-2 text-sm rounded-md bg-white/10 text-white hover:bg-white/12 transition"
+                className="px-4 py-2 text-sm rounded-md bg-white/10 text-white hover:bg-white/12 transition focus:outline-none focus:ring-2 focus:ring-primary-400"
                 onClick={closeModal}
+                aria-label="Close modal"
               >
                 Close
               </button>

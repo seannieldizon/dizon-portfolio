@@ -111,7 +111,7 @@ export default function Projects() {
         {/* Side / Personal Projects */}
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">Side Projects</h3>
-          <p className="mb-6 text-sm text-gray-300">Personal or experimental projects (if none, shows N/A).</p>
+          <p className="mb-6 text-sm text-gray-300">Personal or experimental projects.</p>
           {renderProjectGrid(sideProjects)}
         </div>
       </div>

@@ -5,11 +5,47 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track active section for highlighting
+  useEffect(() => {
+    const sections = ["home", "about", "projects", "contact"];
+    
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 150; // Offset for navbar height + some padding
+
+      // Find which section is currently in view
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          if (scrollPosition >= sectionTop) {
+            setActiveSection(sections[i]);
+            return;
+          }
+        }
+      }
+      // Default to home if at the top
+      setActiveSection("home");
+    };
+
+    // Initial check
+    updateActiveSection();
+
+    // Update on scroll
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   // Close mobile menu when resizing to desktop
@@ -21,10 +57,19 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, [open]);
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) setOpen(false);
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [open]);
+
   const navLinks = [
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
+    { href: "#about", label: "About", id: "about" },
+    { href: "#projects", label: "Projects", id: "projects" },
+    { href: "#contact", label: "Contact", id: "contact" },
   ];
 
   /**
@@ -88,22 +133,34 @@ export default function Navbar() {
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sunlit-clay-500 group-hover:w-full transition-all duration-300" />
         </motion.a>
 
-        <nav className="hidden md:flex items-center gap-6 text-sm">
-          {navLinks.map((link, index) => (
-            <motion.a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="text-gray-300 hover:text-sunlit-clay-500 relative transition-colors duration-200 group"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.3 }}
-              whileHover={{ y: -2 }}
-            >
-              {link.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sunlit-clay-500 group-hover:w-full transition-all duration-300" />
-            </motion.a>
-          ))}
+        <nav className="hidden md:flex items-center gap-6 text-sm" aria-label="Main navigation">
+          {navLinks.map((link, index) => {
+            const isActive = activeSection === link.id;
+            return (
+              <motion.a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`relative transition-colors duration-200 group px-2 py-1 rounded-md ${
+                  isActive
+                    ? "text-primary-400 font-semibold"
+                    : "text-gray-300 hover:text-primary-400"
+                }`}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+                whileHover={{ y: -2 }}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-primary-400 transition-all duration-300 ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </motion.a>
+            );
+          })}
 
           {/* Home (replaced Resume) — targets the hero with id="home" */}
           <motion.a
@@ -122,9 +179,10 @@ export default function Navbar() {
         </nav>
 
         <motion.button
-          className="md:hidden inline-flex items-center justify-center p-2 rounded text-gray-200 hover:text-sunlit-clay-500 transition-colors"
+          className="md:hidden inline-flex items-center justify-center p-2 rounded text-gray-200 hover:text-primary-400 focus:text-primary-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-neutral-500"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
           whileTap={{ scale: 0.9 }}
         >
@@ -142,11 +200,14 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-menu"
             className="md:hidden bg-black-forest-500/95 backdrop-blur-md border-t border-white/5"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
+            role="menu"
+            aria-label="Mobile navigation menu"
           >
             <motion.div
               className="px-6 py-4 flex flex-col gap-3 text-gray-200"
@@ -154,20 +215,28 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.05 }}
             >
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="hover:text-sunlit-clay-500 transition-colors"
-                  initial={{ x: -20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: index * 0.06 + 0.08 }}
-                  whileHover={{ x: 6 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, index) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`px-3 py-2 rounded-md transition-colors ${
+                      isActive
+                        ? "text-primary-400 font-semibold bg-primary-400/10"
+                        : "hover:text-primary-400 hover:bg-white/5"
+                    }`}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.06 + 0.08 }}
+                    whileHover={{ x: 6 }}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {link.label}
+                  </motion.a>
+                );
+              })}
 
               {/* mobile Home button */}
               <motion.a

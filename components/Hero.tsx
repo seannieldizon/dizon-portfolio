@@ -1,6 +1,7 @@
 // components/Hero.tsx
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Hero(): JSX.Element {
   const [imageError, setImageError] = useState(false);
@@ -39,6 +40,7 @@ export default function Hero(): JSX.Element {
         background:
           "linear-gradient(180deg, #283618 0%, #1f2a13 50%, #18200e 100%)",
       }}
+      aria-label="Hero section"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -97,12 +99,15 @@ export default function Hero(): JSX.Element {
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-32 h-40 md:w-44 md:h-56 rounded-2xl overflow-hidden border-4 border-sunlit-clay-500/40 shadow-2xl bg-gradient-to-br from-slate-700 to-slate-800 ring-4 ring-sunlit-clay-500/20">
+                <div className="w-32 h-40 md:w-44 md:h-56 rounded-2xl overflow-hidden border-4 border-primary-400/40 shadow-2xl bg-gradient-to-br from-slate-700 to-slate-800 ring-4 ring-primary-400/20">
                   {!imageError ? (
-                    <img
-                      src="/images/sean.jpg"
-                      alt="Sean Niel S. Dizon"
+                    <Image
+                      src="/images/dizon-formal.jpg"
+                      alt="Sean Niel S. Dizon - Web & Systems Developer"
+                      width={176}
+                      height={224}
                       className="w-full h-full object-cover"
+                      priority
                       onError={() => setImageError(true)}
                     />
                   ) : (
@@ -181,17 +186,20 @@ export default function Hero(): JSX.Element {
               >
                 <motion.a
                   href="#projects"
-                  className="btn-mint"
+                  className="btn-mint focus:outline-none focus:ring-4 focus:ring-primary-400/50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="View projects section"
                 >
                   View Projects
                 </motion.a>
                 <motion.a
                   href="/Dizon-cv.pdf"
-                  className="btn-outline-mint"
+                  className="btn-outline-mint focus:outline-none focus:ring-4 focus:ring-primary-400/50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  download
+                  aria-label="Download resume PDF"
                 >
                   Download Resume
                 </motion.a>
@@ -218,14 +226,21 @@ export default function Hero(): JSX.Element {
                 transition={{ type: "spring", stiffness: 200 }}
               >
                 {/* Project Image */}
-                <motion.img
-                  src="/images/eduvision-login.png"
-                  alt="Faculty Management System"
-                  className="absolute inset-0 w-full h-full object-cover"
+                <motion.div
+                  className="absolute inset-0 w-full h-full"
                   initial={{ scale: 1.05 }}
                   whileHover={{ scale: 1.12 }}
                   transition={{ duration: 0.6, ease: easeSmooth }}
-                />
+                >
+                  <Image
+                    src="/images/eduvision-login.png"
+                    alt="EduVision Faculty Management System - Featured Project"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 672px"
+                    priority={false}
+                  />
+                </motion.div>
 
                 {/* Dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
