@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="675" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#070b14"/>
+      <stop offset="0.5" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="200" y1="100" x2="1000" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eb8f0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#3aa0e0" stop-opacity="0.08"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 180) rotate(90) scale(280 320)">
+      <stop stop-color="#5eb8f0" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#5eb8f0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#accent)"/>
+  <circle cx="900" cy="180" r="280" fill="url(#glow)"/>
+  <rect x="72" y="72" width="1056" height="531" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(232,238,247,0.12)" stroke-width="2"/>
+  <text x="120" y="250" fill="#e8eef7" font-family="Georgia, serif" font-size="72" font-weight="700">HotVibes</text>
+  <text x="120" y="320" fill="#5eb8f0" font-family="system-ui, sans-serif" font-size="28" font-weight="600">Production Website</text>
+  <text x="120" y="380" fill="rgba(232,238,247,0.7)" font-family="system-ui, sans-serif" font-size="24">hotvibes.vip</text>
+  <rect x="120" y="430" width="220" height="44" rx="22" fill="rgba(94,184,240,0.16)" stroke="#5eb8f0" stroke-width="1.5"/>
+  <text x="230" y="458" text-anchor="middle" fill="#5eb8f0" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Currently Maintaining</text>
+</svg>

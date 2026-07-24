@@ -1,19 +1,19 @@
 // lib/fonts.ts
-import { Inter, Poppins } from 'next/font/google';
+import { DM_Sans, Outfit } from "next/font/google";
 
-// Primary font for body text - Inter (clean, readable)
-export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
+// Body — readable, modern, not a default AI stack
+export const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-dm-sans",
   preload: true,
 });
 
-// Display font for headings - Poppins (modern, professional)
-export const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  display: 'swap',
-  variable: '--font-poppins',
+// Display — distinctive headings
+export const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-outfit",
   preload: true,
 });

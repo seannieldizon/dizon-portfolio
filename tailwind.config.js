@@ -7,130 +7,67 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Design System: Colors
       colors: {
-        // Primary (accent) - sunlit clay
+        // Accent — soft sky blue
         primary: {
-          DEFAULT: "#dda15e",
-          50: "#f8ecdf",
-          100: "#f1dabf",
-          200: "#ebc79f",
-          300: "#e4b57f",
-          400: "#dda15e",
-          500: "#d1842c",
-          600: "#9d6321",
-          700: "#684216",
-          800: "#34210b",
-          900: "#1a1005"
+          DEFAULT: "#5eb8f0",
+          50: "#eef8fd",
+          100: "#d6eefb",
+          200: "#aedcf7",
+          300: "#7ec8f3",
+          400: "#5eb8f0",
+          500: "#3aa0e0",
+          600: "#2680bc",
+          700: "#1e648f",
+          800: "#1a4f70",
+          900: "#0f2f44"
         },
-        // Neutral (background/text) - black forest
+        // Backgrounds — cool slate
         neutral: {
-          DEFAULT: "#283618",
-          50: "#d5e4c3",
-          100: "#aac987",
-          200: "#80ac4d",
-          300: "#547133",
-          400: "#283618",
-          500: "#1f2a13",
-          600: "#18200e",
-          700: "#101509",
-          800: "#080b05",
-          900: "#000000"
+          DEFAULT: "#0b1220",
+          50: "#e8eef7",
+          100: "#c5d0e0",
+          200: "#9aa8bc",
+          300: "#6b7a90",
+          400: "#3d4d66",
+          500: "#0b1220",
+          600: "#111827",
+          700: "#070b14",
+          800: "#05080f",
+          900: "#02040a"
         },
-        // Accent (secondary) - olive leaf
+        // Secondary surface accent
         accent: {
-          DEFAULT: "#606c38",
-          50: "#e2e7d1",
-          100: "#c5d0a3",
-          200: "#a9b876",
-          300: "#88994f",
-          400: "#606c38",
-          500: "#4c562c",
-          600: "#394121",
-          700: "#262b16",
-          800: "#13160b",
-          900: "#0a0c06"
+          DEFAULT: "#3aa0e0",
+          50: "#e8f4fc",
+          100: "#c5e4f7",
+          200: "#8ec9ef",
+          300: "#5eb8f0",
+          400: "#3aa0e0",
+          500: "#2680bc",
+          600: "#1e648f",
+          700: "#174d6e",
+          800: "#11364d",
+          900: "#0a2030"
         },
-        // Light text - cornsilk
+        // Soft off-white text (not warm cream)
         light: {
-          DEFAULT: "#fefae0",
-          50: "#fffef9",
-          100: "#fffdf3",
-          200: "#fefced",
-          300: "#fefbe7",
-          400: "#fefae0",
-          500: "#fbeb84",
-          600: "#f8dc27",
-          700: "#baa206",
-          800: "#5d5103",
-          900: "#2e2801"
+          DEFAULT: "#e8eef7",
+          50: "#ffffff",
+          100: "#f5f8fc",
+          200: "#e8eef7",
+          300: "#d4dde9",
+          400: "#e8eef7",
+          500: "#9aa8bc",
+          600: "#6b7a90",
+          700: "#3d4d66",
+          800: "#1e2a3d",
+          900: "#0b1220"
         },
-        // Legacy palette (maintained for backward compatibility)
-        olive_leaf: {
-          DEFAULT: "#606c38",
-          100: "#13160b",
-          200: "#262b16",
-          300: "#394121",
-          400: "#4c562c",
-          500: "#606c38",
-          600: "#88994f",
-          700: "#a9b876",
-          800: "#c5d0a3",
-          900: "#e2e7d1"
-        },
-        black_forest: {
-          DEFAULT: "#283618",
-          100: "#080b05",
-          200: "#101509",
-          300: "#18200e",
-          400: "#1f2a13",
-          500: "#283618",
-          600: "#547133",
-          700: "#80ac4d",
-          800: "#aac987",
-          900: "#d5e4c3"
-        },
-        cornsilk: {
-          DEFAULT: "#fefae0",
-          100: "#5d5103",
-          200: "#baa206",
-          300: "#f8dc27",
-          400: "#fbeb84",
-          500: "#fefae0",
-          600: "#fefbe7",
-          700: "#fefced",
-          800: "#fffdf3",
-          900: "#fffef9"
-        },
-        sunlit_clay: {
-          DEFAULT: "#dda15e",
-          100: "#34210b",
-          200: "#684216",
-          300: "#9d6321",
-          400: "#d1842c",
-          500: "#dda15e",
-          600: "#e4b57f",
-          700: "#ebc79f",
-          800: "#f1dabf",
-          900: "#f8ecdf"
-        },
-        copperwood: {
-          DEFAULT: "#bc6c25",
-          100: "#251507",
-          200: "#4b2b0f",
-          300: "#704016",
-          400: "#96561e",
-          500: "#bc6c25",
-          600: "#d98840",
-          700: "#e3a570",
-          800: "#ecc3a0",
-          900: "#f6e1cf"
-        }
       },
-      // Design System: Typography
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.05em' }],
@@ -144,30 +81,25 @@ module.exports = {
         '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.04em' }],
         '6xl': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.04em' }],
       },
-      // Design System: Spacing
       spacing: {
         '18': '4.5rem',
         '88': '22rem',
         '128': '32rem',
       },
-      // Design System: Border Radius
       borderRadius: {
         'xl': '0.75rem',
         '2xl': '1rem',
         '3xl': '1.5rem',
       },
-      // Design System: Shadows
       boxShadow: {
-        'glow-clay': '0 6px 30px rgba(221, 161, 94, 0.12)',
-        'glow-primary': '0 8px 32px rgba(221, 161, 94, 0.2)',
+        'glow-clay': '0 6px 30px rgba(58, 160, 224, 0.12)',
+        'glow-primary': '0 8px 32px rgba(58, 160, 224, 0.2)',
         'inner-lg': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)',
       },
-      // Design System: Ring Colors
       ringColor: {
-        clay: '#dda15e',
-        primary: '#dda15e',
+        clay: '#5eb8f0',
+        primary: '#5eb8f0',
       },
-      // Max Width Container
       maxWidth: {
         'container': '1280px',
         'content': '768px',

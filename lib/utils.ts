@@ -45,12 +45,24 @@ export function generatePersonSchema(data: {
   sameAs?: string[];
 }) {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
+    "@context": "https://schema.org",
+    "@type": "Person",
     name: data.name,
     jobTitle: data.jobTitle,
     email: data.email,
     url: data.url,
     sameAs: data.sameAs || [],
+    knowsAbout: [
+      "Full-Stack Development",
+      "Web Development",
+      "Mobile Development",
+      "AI Applications",
+      "REST APIs",
+      "React",
+      "Next.js",
+      "Node.js",
+      "TypeScript",
+      "Flutter",
+    ],
   };
 }

@@ -1,5 +1,5 @@
 // data/projects.ts
-export type ProjectCategory = "client" | "school" | "side";
+export type ProjectCategory = "client" | "school" | "side" | "featured";
 
 export interface Project {
   id: string;
@@ -7,105 +7,178 @@ export interface Project {
   short: string;
   detailed?: string;
   tech: string[];
-  image?: string; // path under /public/images/
+  image?: string;
   repo?: string;
   demo?: string;
-  // optional metadata
-  category: ProjectCategory; // "client" | "school" | "side"
-  client?: string;        // company/client name when this was built for a client
-  role?: string;          // your role (e.g., "Full-stack developer", "Lead developer")
-  year?: number;          // year completed or deployed
-  private?: boolean;      // true when repo/demo are private or available on request
-  highlights?: string[];  // concise bullets suitable for display
+  category: ProjectCategory;
+  client?: string;
+  role?: string;
+  year?: number;
+  private?: boolean;
+  highlights?: string[];
+  problem?: string;
+  solution?: string;
+  status?: string;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    id: "faculty-management",
-    title: "EduVision: Real-time Faculty Attendance Monitoring System using IOT Based Smart Camera",
+    id: "hotvibes",
+    title: "HotVibes",
     short:
-      "Web application to manage faculty records, roles, and account statuses with an admin dashboard.",
+      "Production website for hotvibes.vip — built, deployed, and actively maintained.",
     detailed:
-      "Full-stack system that supports user management, role-based access, and status workflows. Includes search, pagination, and notifications on critical updates. Integrated with IoT camera input for real-time attendance logging as part of an academic capstone project.",
-    tech: ["Vite", "React", "Node.js", "Express", "MongoDB", "Python"],
-    image: "/images/eduvision-logo.png",
-    repo: "https://github.com/YOUR-USERNAME/faculty-management",
-    demo: "#",
-    category: "school",
-    role: "Project Lead (Academic)",
-    year: 2024,
+      "Developed and currently maintaining the production website hotvibes.vip. Responsible for full-stack development, feature implementation, bug fixing, performance optimization, deployment, and continuous maintenance in a live production environment.",
+    tech: ["Next.js", "React", "TypeScript", "Node.js", "Vercel"],
+    image: "/images/hotvibes-preview.png",
+    demo: "https://hotvibes.vip",
+    category: "featured",
+    role: "Full-Stack Developer",
+    year: 2025,
     private: false,
+    featured: true,
+    status: "Currently Maintaining",
+    problem:
+      "Needed a reliable, production-ready web presence with ongoing feature delivery and performance care.",
+    solution:
+      "Built and maintain a live full-stack site with continuous deployment, bug fixes, and optimization.",
     highlights: [
-      "Designed admin dashboard for faculty records and attendance review",
-      "Integrated real-time camera input for automated attendance",
-      "Implemented role-based access and notifications"
-    ]
+      "Full-stack development of a live production website",
+      "Feature implementation and iterative product improvements",
+      "Bug fixing and performance optimization",
+      "Deployment and continuous maintenance",
+    ],
   },
   {
-    id: "cctv-pan-tilt",
-    title: "CCTV Pan–Tilt Controller",
-    short: "ESP32-based pan/tilt controller with a lightweight web UI for remote movement control.",
+    id: "ignis",
+    title: "IGNIS",
+    short:
+      "Offline AI-assisted coding tool I'm building for private, local developer workflows.",
     detailed:
-      "Firmware on ESP32 for servo control and WebSocket communication; lightweight web UI provides joystick-style control. Demonstrates integration between embedded firmware and web frontend. Completed as a course project to demonstrate embedded-to-web integration.",
-    tech: ["ESP32", "Arduino", "WebSocket", "HTML/CSS/JS"],
-    image: "/images/eduvision-logo.png",
-    repo: "https://github.com/YOUR-USERNAME/cctv-pan-tilt",
-    demo: "#",
-    category: "school",
-    role: "Developer (Academic)",
-    year: 2023,
-    private: false,
+      "IGNIS is an offline AI-assisted coding application currently in development. It is designed to help developers write, understand, and improve code without relying on cloud AI services — keeping source code private and usable without an internet connection. Focus areas include local inference, coding assistance, and a developer-first experience.",
+    tech: ["TypeScript", "Electron", "Node.js", "Local LLMs", "AI"],
+    image: "/images/ignis-preview.png",
+    category: "featured",
+    role: "Founder / Full-Stack Developer",
+    year: 2026,
+    private: true,
+    featured: true,
+    status: "In Development",
+    problem:
+      "Most AI coding tools require the cloud, which raises privacy, cost, and offline-availability concerns.",
+    solution:
+      "Building IGNIS as an offline-first AI coding assistant that runs locally and keeps code private.",
     highlights: [
-      "Implemented real-time WebSocket control for servos",
-      "Built a small web UI with joystick controls",
-      "Documented firmware and wiring for replication"
-    ]
+      "Offline-first AI assistance for coding",
+      "Local workflows that do not send source code to the cloud",
+      "Designed for day-to-day developer productivity",
+      "Actively under development as a personal product",
+    ],
   },
   {
     id: "grand-eleva",
     title: "Grand Eleva — Property Management",
     short:
-      "Production property-management platform for Grand Eleva Prime Properties Corporation — manages clients, property listings, transactions, payments, and documents.",
+      "Production property platform for clients, listings, transactions, and documents.",
     detailed:
-      "End-to-end, production-grade web application delivered to a local real estate company. Implemented client and property management dashboards, transaction and payment tracking, document management, role-based access control, and administrative workflow automation. Focused on secure data handling, maintainability, and reducing manual processing for the operations team.",
-    tech: ["React", "Node.js", "MongoDB", "TypeScript", "Next.js"],
+      "End-to-end production web application for a local real estate company. Implemented client and property dashboards, transaction and payment tracking, document management, role-based access, and administrative workflows focused on secure data handling and maintainability.",
+    tech: ["React", "Next.js", "TypeScript", "Node.js", "MongoDB"],
     image: "/images/geppco-logo.png",
     repo: "Private (available on request)",
     demo: "",
     category: "client",
-    client: "Grand Eleva Prime Properties Corporation",
+    client: "Grand Eleva Prime Properties",
     role: "Full-stack Developer",
     year: 2024,
     private: true,
+    problem:
+      "Operations relied on manual processes for clients, properties, transactions, and documents.",
+    solution:
+      "Delivered a production platform with RBAC, dashboards, and automated operational workflows.",
     highlights: [
-      "Developed production features for client operations (clients, properties, transactions)",
-      "Implemented role-based access and secure backend services",
-      "Delivered a maintainable codebase and reduced manual tasks for operations"
-    ]
+      "Production features for clients, properties, and transactions",
+      "Role-based access and secure backend services",
+      "Reduced manual processing for the operations team",
+    ],
   },
-
-  // --- New client project added per your request ---
   {
     id: "move-e-app",
-    title: "MOVE-E — Booking & Delivery Service App",
+    title: "MOVE-E — Booking & Delivery",
     short:
-      "Mobile booking & delivery platform that connects users to local service providers and supports bookings, scheduling, and deliveries.",
+      "Flutter booking and delivery app with REST APIs for a client feasibility study.",
     detailed:
-      "Developed as part of a feasibility study and prototype for the MOVE-E app (booking & delivery services). Built the cross-platform mobile client with Flutter (Dart) and implemented REST APIs and business logic using Node.js + Express. Data persistence and operational data are stored in MongoDB. Key features implemented: service discovery, provider onboarding, booking workflow, scheduling, secure payments integration (prototype), push notifications, and basic delivery tracking. Delivered the prototype and technical inputs used in the feasibility study prepared for Amors Group.",
-    tech: ["Flutter (Dart)", "Node.js", "Express", "MongoDB"],
+      "Cross-platform Flutter client with Node.js + Express REST APIs and MongoDB. Features include service discovery, provider onboarding, booking, scheduling, payments prototype, notifications, and delivery tracking — used in a feasibility study for Amors Group.",
+    tech: ["Flutter", "Dart", "Node.js", "Express", "MongoDB"],
     image: "/images/Move-e_logo.png",
     repo: "Private (available on request)",
     demo: "",
     category: "client",
-    client: "Amors Group (MOVE-E feasibility)",
-    role: "Developer",
+    client: "Amors Group",
+    role: "Full-stack / Mobile Developer",
     year: 2025,
     private: true,
+    problem:
+      "Needed a technical prototype to validate booking and delivery workflows for a feasibility study.",
+    solution:
+      "Built a Flutter app and REST backend covering discovery, bookings, scheduling, and tracking.",
     highlights: [
-      "Built Flutter mobile client for booking and provider discovery",
-      "Implemented backend APIs with Node.js + Express and MongoDB",
-      "Implemented booking, scheduling, provider onboarding, and notification flows",
-      "Prepared the technical prototype used in the feasibility study and documentation"
-    ]
-  }
+      "Flutter mobile client for booking and provider discovery",
+      "Backend APIs with Node.js, Express, and MongoDB",
+      "Booking, scheduling, onboarding, and notification flows",
+    ],
+  },
+  {
+    id: "faculty-management",
+    title: "EduVision — Faculty Attendance",
+    short:
+      "IoT faculty attendance system with admin dashboards and real-time camera input.",
+    detailed:
+      "Full-stack academic capstone supporting user management, role-based access, attendance workflows, search, pagination, and notifications. Integrated IoT camera input for real-time attendance logging.",
+    tech: ["Vite", "React", "Node.js", "Express", "MongoDB", "Python"],
+    image: "/images/eduvision-login.png",
+    repo: "",
+    demo: "",
+    category: "school",
+    role: "Project Lead",
+    year: 2024,
+    private: false,
+    problem:
+      "Manual faculty attendance tracking was slow and error-prone for school administrators.",
+    solution:
+      "Built a web system with IoT camera integration and admin dashboards for real-time attendance.",
+    highlights: [
+      "Admin dashboard for faculty records and attendance",
+      "Real-time camera input for automated attendance",
+      "Role-based access and critical-update notifications",
+    ],
+  },
+  {
+    id: "cctv-pan-tilt",
+    title: "CCTV Pan–Tilt Controller",
+    short:
+      "ESP32 pan/tilt controller with a lightweight web UI for remote camera movement.",
+    detailed:
+      "ESP32 firmware for servo control with WebSocket communication and a joystick-style web UI. Demonstrates embedded firmware integrated with a browser frontend.",
+    tech: ["ESP32", "Arduino", "WebSocket", "HTML/CSS/JS"],
+    image: "/images/eduvision-logo.png",
+    repo: "",
+    demo: "",
+    category: "school",
+    role: "Developer",
+    year: 2023,
+    private: false,
+    problem:
+      "Needed remote control of a camera mount without proprietary hardware software.",
+    solution:
+      "Built ESP32 firmware and a WebSocket web UI for real-time pan/tilt control.",
+    highlights: [
+      "Real-time WebSocket servo control",
+      "Joystick-style web UI",
+      "Documented firmware and wiring for replication",
+    ],
+  },
 ];
+
+export const featuredProjects = projects.filter((p) => p.featured);
+export const otherProjects = projects.filter((p) => !p.featured);
