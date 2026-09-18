@@ -117,6 +117,12 @@ export const achievements: Achievement[] = [
     icon: "globe",
   },
   {
+    id: "beloved",
+    title: "Beloved — Digital Invitation Showcase",
+    detail: "40 interactive invitation designs across 8 occasions",
+    icon: "globe",
+  },
+  {
     id: "ignis",
     title: "IGNIS — Offline AI Coding Assistant",
     detail: "Building a private, offline-first AI tool for developers",

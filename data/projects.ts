@@ -51,6 +51,43 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "beloved-invitations",
+    title: "Beloved — Digital Invitation Showcase",
+    short:
+      "Interactive invitation gallery with 40 designs across 8 occasions — guests open a full web experience, not a static card.",
+    detailed:
+      "Beloved is a modern digital invitation showcase built as an elegant alternative to printed invites. Visitors browse designs by occasion, preview styles, and open a selected invitation to experience it the way a guest would — on phone, tablet, or desktop. The site ships 40 complete sample designs across eight celebrations (weddings, birthdays, debuts, christenings, graduations, anniversaries, engagements, and corporate events), each with its own typography, imagery, layout, and tone. Invitation pages are interactive: opening flow, event details, personalized messaging, live countdown, venue information, schedule/program, storytelling sections, and RSVP prompts. Designs are generated from reusable components and structured invitation data, so new occasions and templates can be added without rebuilding every page from scratch. Photography is sourced from Unsplash and organized so assets can be swapped cleanly. Live at digital-invitation-gold.vercel.app.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Dynamic Routing",
+    ],
+    image: "/images/beloved-preview.png",
+    demo: "https://digital-invitation-gold.vercel.app/",
+    category: "featured",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    featured: true,
+    status: "Live Showcase",
+    problem:
+      "Printed invitations are static and easy to lose; guests need a shareable, mobile-friendly way to see event details in one place.",
+    solution:
+      "Built a data-driven invitation showcase where each template opens as a full interactive guest experience, organized by occasion.",
+    highlights: [
+      "Invitation gallery with 40 designs across 8 occasions",
+      "Interactive guest experience: countdown, venues, program, story, and RSVP",
+      "Mobile-first responsive layouts for phone, tablet, and desktop",
+      "Occasion-specific templates with distinct visual identities",
+      "Dynamic routes such as /occasions/wedding and /invitation/wedding/ivory-romance",
+      "Reusable, data-driven architecture for adding templates without one-off pages",
+      "Framer Motion transitions and invitation opening animations",
+    ],
+  },
+  {
     id: "ignis",
     title: "IGNIS",
     short:
