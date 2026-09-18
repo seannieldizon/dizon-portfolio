@@ -17,6 +17,20 @@ const contactLinks = [
     ),
   },
   {
+    label: "Phone",
+    value: profile.phone,
+    href: profile.phoneHref,
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3.5 5.5c0-1 .8-1.8 1.8-1.8h2.2c.7 0 1.3.4 1.5 1.1l.8 2.4c.2.6 0 1.2-.5 1.6l-1.2 1c1.2 2.3 3 4.1 5.3 5.3l1-1.2c.4-.5 1-.7 1.6-.5l2.4.8c.7.2 1.1.8 1.1 1.5v2.2c0 1-.8 1.8-1.8 1.8C9.7 20.5 3.5 14.3 3.5 5.5z"
+        />
+      </svg>
+    ),
+  },
+  {
     label: "GitHub",
     value: "github.com/seannieldizon",
     href: profile.social.github,

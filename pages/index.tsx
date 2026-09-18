@@ -24,6 +24,7 @@ const personSchema = generatePersonSchema({
   name: profile.name,
   jobTitle: profile.title,
   email: profile.email,
+  telephone: profile.phoneHref.replace("tel:", ""),
   url: siteUrl,
   sameAs: [profile.social.github, profile.social.linkedin],
 });

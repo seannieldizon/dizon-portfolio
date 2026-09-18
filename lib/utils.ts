@@ -41,6 +41,7 @@ export function generatePersonSchema(data: {
   name: string;
   jobTitle: string;
   email: string;
+  telephone?: string;
   url?: string;
   sameAs?: string[];
 }) {
@@ -50,6 +51,7 @@ export function generatePersonSchema(data: {
     name: data.name,
     jobTitle: data.jobTitle,
     email: data.email,
+    telephone: data.telephone,
     url: data.url,
     sameAs: data.sameAs || [],
     knowsAbout: [

@@ -7,26 +7,28 @@ export const profile = {
   subtitle:
     "Building production web apps, mobile experiences, AI-powered tools, automation workflows, and REST APIs with modern JavaScript frameworks.",
   email: "saynoseanniel@gmail.com",
-  location: "Vinzons, Camarines Norte, Philippines",
+  phone: "0961-042-4462",
+  phoneHref: "tel:+639610424462",
+  location: "Purok 3, Sto. Domingo, Vinzons, Camarines Norte, Philippines",
   siteUrl: "https://seannieldizon.dev",
-  resumePath: "/Dizon-cv.pdf",
+  resumePath: "/Resume-Dizon_2.0.pdf",
   photo: "/images/dizon-formal.jpg",
   social: {
     github: "https://github.com/seannieldizon",
     linkedin: "https://linkedin.com/in/sean-niel-dizon-296b49382",
   },
   about: [
-    "I am a Bachelor of Science in Information Technology graduate and a Full-Stack Software Developer passionate about solving real-world problems with clean, production-ready software.",
-    "My interests span AI applications, web development, mobile development, and automation. I focus on building scalable, maintainable systems — from REST APIs and databases to polished user interfaces and reliable deployments.",
-    "I continuously learn new technologies and apply them in client work and personal projects, always aiming for code that is clear, testable, and ready for real users.",
+    "I am a Bachelor of Science in Information Technology graduate and a Full-Stack Software Developer focused on practical web, mobile, and AI-assisted solutions.",
+    "I maintain HotVibes, a live creator platform with 8,000+ users, and build client systems across React, Node.js, Flutter, and related stacks. I care about clean interfaces, reliable backends, and software that holds up in production.",
+    "I am Civil Service eligible (Professional Level) and continuously learn new tools while delivering maintainable work for clients, internships, and personal products.",
   ],
   heroFocus: [
     "Web Development",
     "Mobile Development",
     "AI Applications",
-    "Automation",
+    "IoT & Embedded",
     "REST APIs",
-    "Modern JavaScript Frameworks",
+    "Production Systems",
   ],
 } as const;
 
@@ -42,8 +44,15 @@ export const education: EducationEntry[] = [
   {
     degree: "Bachelor of Science in Information Technology",
     institution: "Camarines Norte State College",
-    graduated: "June 2026",
+    graduated: "2022 — 2026",
     location: "Daet, Camarines Norte",
+    note: "Graduated June 2026",
+  },
+  {
+    degree: "Senior High School",
+    institution: "Vinzons Pilot High School",
+    graduated: "2020 — 2022",
+    location: "Vinzons, Camarines Norte",
   },
 ];
 
@@ -53,6 +62,7 @@ export type Certification = {
   passed: string;
   issuer?: string;
   description?: string;
+  dateLabel?: string;
 };
 
 export const certifications: Certification[] = [
@@ -61,7 +71,26 @@ export const certifications: Certification[] = [
     level: "Professional Level",
     passed: "March 2026",
     issuer: "Civil Service Commission",
-    description: "Professional eligibility for government and public-sector roles in the Philippines.",
+    description:
+      "Professional eligibility for government and public-sector roles in the Philippines.",
+    dateLabel: "Passed",
+  },
+  {
+    title: "TOPCIT",
+    level: "Level 3",
+    passed: "June 2025",
+    issuer: "Test of Practical Competency in IT",
+    description: "Practical IT competency assessment covering applied technical skills.",
+    dateLabel: "Achieved",
+  },
+  {
+    title: "TESDA Computer Systems Servicing (CSS) NC II",
+    level: "Trainee",
+    passed: "Training completed",
+    issuer: "TESDA",
+    description:
+      "Computer systems servicing training covering assembly, troubleshooting, and related support skills.",
+    dateLabel: "Status",
   },
 ];
 
@@ -75,17 +104,43 @@ export type ExperienceEntry = {
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Freelance Full-Stack Developer",
-    company: "Independent / Client Work",
-    period: "2024 — Present",
+    role: "Freelance Developer",
+    company: "Self-Employed",
+    period: "June 2024 — Present",
     type: "Freelance",
     responsibilities: [
-      "Full-stack web development for production client applications",
-      "Mobile app development with Flutter and REST backends",
-      "AI-powered application features and integrations",
-      "API design, development, and documentation",
-      "Database design and data modeling",
-      "Deployment, hosting, and ongoing maintenance",
+      "Design and develop AI/ML-assisted, web, mobile, and IoT solutions for clients and personal products",
+      "Build responsive full-stack web apps with React.js, Node.js, Express.js, and MongoDB",
+      "Develop cross-platform Flutter apps and integrate REST APIs and backend services",
+      "Create IoT and embedded prototypes with ESP32, Arduino, and Raspberry Pi",
+      "Provide troubleshooting, optimization, and end-to-end technical support",
+      "Maintain HotVibes — a live creator platform with 8,000+ users",
+    ],
+  },
+  {
+    role: "Student Intern",
+    company: "LGU Talisay — Office of the Municipal Engineer",
+    period: "February 2026 — May 2026",
+    type: "Internship",
+    responsibilities: [
+      "Assisted in document processing, filing, encoding, and scanning of engineering records",
+      "Provided technical support and basic troubleshooting for office equipment and systems",
+      "Participated in field inspections and documentation of infrastructure projects",
+      "Supported data management, report preparation, and office administrative tasks",
+      "Gained experience in government office operations, teamwork, and professional communication",
+    ],
+  },
+  {
+    role: "Web Developer",
+    company: "Grand Eleva Prime Properties Co.",
+    period: "June 2025 — August 2025",
+    type: "Contract",
+    responsibilities: [
+      "Developed a web-based system for managing client and transaction records",
+      "Implemented features for adding, updating, and tracking client and property data",
+      "Built the frontend with React.js and the backend with Node.js and MongoDB",
+      "Ensured secure data handling and optimized database performance",
+      "Collaborated with stakeholders to gather requirements and deliver a usable solution",
     ],
   },
 ];
@@ -107,13 +162,13 @@ export const achievements: Achievement[] = [
   {
     id: "bsit",
     title: "BS Information Technology Graduate",
-    detail: "Graduated June 2026",
+    detail: "Camarines Norte State College · Graduated June 2026",
     icon: "grad",
   },
   {
     id: "hotvibes",
-    title: "Production Website",
-    detail: "Created and currently maintaining hotvibes.vip",
+    title: "HotVibes — Live Creator Platform",
+    detail: "Maintaining a production platform with 8,000+ users",
     icon: "globe",
   },
   {
@@ -123,15 +178,15 @@ export const achievements: Achievement[] = [
     icon: "globe",
   },
   {
-    id: "ignis",
-    title: "IGNIS — Offline AI Coding Assistant",
-    detail: "Building a private, offline-first AI tool for developers",
-    icon: "code",
+    id: "topcit",
+    title: "TOPCIT Level 3",
+    detail: "Achieved June 2025",
+    icon: "badge",
   },
   {
     id: "freelance",
     title: "Freelance Software Developer",
-    detail: "Delivering full-stack web, mobile, and AI solutions for clients",
+    detail: "June 2024 — Present · Web, mobile, AI, and IoT solutions",
     icon: "code",
   },
 ];

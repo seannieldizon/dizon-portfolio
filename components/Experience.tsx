@@ -25,7 +25,7 @@ export default function Experience(): JSX.Element {
 
         <div className="mt-12 space-y-6">
           {experience.map((job, idx) => (
-            <Reveal key={job.role} delay={idx * 0.08}>
+            <Reveal key={`${job.company}-${job.role}-${job.period}`} delay={idx * 0.08}>
               <article className="card-glass rounded-2xl p-6 md:p-8">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
                   <div>

@@ -56,8 +56,11 @@ export default function About(): JSX.Element {
                           <p className="text-sm text-light/50">{entry.location}</p>
                         )}
                         <p className="mt-3 inline-flex items-center text-sm font-medium text-primary-300 bg-primary-400/10 border border-primary-400/20 rounded-full px-3 py-1">
-                          Graduated: {entry.graduated}
+                          {entry.note || entry.graduated}
                         </p>
+                        {entry.note && (
+                          <p className="mt-2 text-xs text-light/50">{entry.graduated}</p>
+                        )}
                       </div>
                     </li>
                   ))}
