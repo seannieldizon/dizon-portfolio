@@ -1,8 +1,12 @@
 // components/ProjectCard.tsx
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import type { Project } from "../data/projects";
+
+function isContainImage(src: string) {
+  return src.endsWith(".svg") || src.includes("logo");
+}
 
 export default function ProjectCard({
   project,
@@ -12,6 +16,7 @@ export default function ProjectCard({
   featured?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const hasRepo =
     Boolean(project.repo) &&
@@ -20,6 +25,18 @@ export default function ProjectCard({
   const hasDemo = Boolean(project.demo) && project.demo !== "#";
   const visibleTech = project.tech.slice(0, featured ? 4 : 3);
   const extraTech = project.tech.length - visibleTech.length;
+
+  const gallery = useMemo(() => {
+    const images = [
+      ...(project.image ? [project.image] : []),
+      ...(project.gallery || []),
+    ];
+    return Array.from(new Set(images));
+  }, [project.image, project.gallery]);
+
+  useEffect(() => {
+    if (open) setActiveImage(0);
+  }, [open, project.id]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -39,6 +56,8 @@ export default function ProjectCard({
     };
   }, [open]);
 
+  const currentSrc = gallery[activeImage];
+
   return (
     <>
       <motion.article
@@ -55,10 +74,10 @@ export default function ProjectCard({
           {project.image ? (
             <Image
               src={project.image}
-              alt=""
+              alt={`${project.title} preview`}
               fill
               className={
-                project.image.endsWith(".svg") || project.image.includes("logo")
+                isContainImage(project.image)
                   ? "object-contain p-4 bg-neutral-700/40"
                   : "object-cover"
               }
@@ -171,7 +190,7 @@ export default function ProjectCard({
               aria-hidden
             />
             <motion.div
-              className="relative z-10 max-w-xl w-full card-glass rounded-2xl p-5 md:p-7 max-h-[85vh] overflow-y-auto"
+              className="relative z-10 max-w-3xl w-full card-glass rounded-2xl p-5 md:p-7 max-h-[90vh] overflow-y-auto"
               initial={{ opacity: 0, y: 16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 12, scale: 0.98 }}
@@ -201,7 +220,57 @@ export default function ProjectCard({
                 </button>
               </div>
 
-              <p className="mt-4 text-sm text-light/75 leading-relaxed">
+              {gallery.length > 0 && currentSrc && (
+                <div className="mt-5 space-y-3">
+                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-black/40">
+                    <Image
+                      src={currentSrc}
+                      alt={`${project.title} screenshot ${activeImage + 1}`}
+                      fill
+                      className={
+                        isContainImage(currentSrc)
+                          ? "object-contain p-6"
+                          : "object-cover object-top"
+                      }
+                      sizes="(max-width: 768px) 100vw, 768px"
+                      priority
+                      unoptimized={currentSrc.endsWith(".svg")}
+                    />
+                  </div>
+
+                  {gallery.length > 1 && (
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                      {gallery.map((src, index) => (
+                        <button
+                          key={src}
+                          type="button"
+                          onClick={() => setActiveImage(index)}
+                          className={`relative h-16 w-24 shrink-0 rounded-lg overflow-hidden border transition ${
+                            index === activeImage
+                              ? "border-primary-400 ring-2 ring-primary-400/30"
+                              : "border-white/10 hover:border-primary-400/40"
+                          }`}
+                          aria-label={`View screenshot ${index + 1}`}
+                          aria-pressed={index === activeImage}
+                        >
+                          <Image
+                            src={src}
+                            alt=""
+                            fill
+                            className={
+                              isContainImage(src) ? "object-contain p-1 bg-black/30" : "object-cover"
+                            }
+                            sizes="96px"
+                            unoptimized={src.endsWith(".svg")}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <p className="mt-5 text-sm text-light/75 leading-relaxed">
                 {project.detailed || project.short}
               </p>
 

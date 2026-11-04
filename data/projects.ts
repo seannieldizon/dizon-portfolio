@@ -8,6 +8,7 @@ export interface Project {
   detailed?: string;
   tech: string[];
   image?: string;
+  gallery?: string[];
   repo?: string;
   demo?: string;
   category: ProjectCategory;
@@ -114,6 +115,11 @@ export const projects: Project[] = [
       "Material 3",
     ],
     image: "/images/palsee-preview.jpg",
+    gallery: [
+      "/images/palsee-home.jpg",
+      "/images/palsee-capture.jpg",
+      "/images/palsee-results.jpg",
+    ],
     category: "featured",
     role: "Android / Computer Vision Developer",
     year: 2026,
@@ -222,6 +228,10 @@ export const projects: Project[] = [
       "Storyforge Local is a private AI story development and writing workspace that talks only to a local Ollama installation. Uploaded manuscripts, embeddings, analysis, suggestions, and generated drafts stay on the machine. Features include story libraries, local analysis with optional embeddings, evidence-backed suggestions with source citations, grounding modes, a custom story creator, and a manuscript editor with revise/continue and export.",
     tech: ["Next.js", "TypeScript", "Ollama", "SQLite", "Local AI"],
     image: "/images/storyforge-preview.png",
+    gallery: [
+      "/images/storyforge-stories.png",
+      "/images/storyforge-mobile.png",
+    ],
     category: "side",
     role: "Full-Stack Developer",
     year: 2026,
@@ -578,6 +588,7 @@ export const projects: Project[] = [
       "Full-stack academic capstone supporting user management, role-based access, attendance workflows, search, pagination, and notifications. Integrated IoT camera input for real-time attendance logging.",
     tech: ["Vite", "React", "Node.js", "Express", "MongoDB", "Python"],
     image: "/images/eduvision-login.png",
+    gallery: ["/images/eduvision-logo.png"],
     repo: "",
     demo: "",
     category: "school",
