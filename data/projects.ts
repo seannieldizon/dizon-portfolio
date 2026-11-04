@@ -189,6 +189,206 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "serve",
+    title: "SERVE — Sign Language Ordering",
+    short:
+      "Computer-vision communication and ordering system where deaf staff use sign language and customers type replies.",
+    detailed:
+      "SERVE is a local computer-vision communication and ordering system. Deaf employees communicate through sign language recognition while hearing customers type replies; facial expression is treated as an independent auxiliary signal. Phases 0–2 cover foundation, sign recognition pipeline, and conversation/ordering UI. Phase 3 adds facial-expression recognition, Raspberry Pi camera abstraction, export tooling, and deployment configuration.",
+    tech: ["Python", "Computer Vision", "Sign Language ML", "Raspberry Pi", "Ordering UI"],
+    image: "/images/serve-preview.jpg",
+    category: "side",
+    role: "Full-Stack / CV Developer",
+    year: 2026,
+    private: false,
+    status: "In Development",
+    problem:
+      "Deaf service staff and hearing customers needed a shared ordering channel without relying on spoken conversation alone.",
+    solution:
+      "Built a local CV pipeline for sign recognition with a conversation/ordering UI and facial-expression support for Raspberry Pi deployment.",
+    highlights: [
+      "Sign recognition pipeline for on-site communication",
+      "Conversation and ordering UI between staff and customers",
+      "Facial expression as an auxiliary recognition signal",
+      "Raspberry Pi camera abstraction and deployment config",
+    ],
+  },
+  {
+    id: "storyforge",
+    title: "Storyforge Local",
+    short:
+      "Private local-first AI story workspace powered by Ollama — manuscripts and drafts never leave your machine.",
+    detailed:
+      "Storyforge Local is a private AI story development and writing workspace that talks only to a local Ollama installation. Uploaded manuscripts, embeddings, analysis, suggestions, and generated drafts stay on the machine. Features include story libraries, local analysis with optional embeddings, evidence-backed suggestions with source citations, grounding modes, a custom story creator, and a manuscript editor with revise/continue and export.",
+    tech: ["Next.js", "TypeScript", "Ollama", "SQLite", "Local AI"],
+    image: "/images/storyforge-preview.png",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Local App",
+    problem:
+      "Most AI writing tools send manuscripts to the cloud, which is a poor fit for private drafting and research.",
+    solution:
+      "Built a localhost writing workspace that uses Ollama only, with libraries, grounded suggestions, and an offline-friendly editor.",
+    highlights: [
+      "Local-only Ollama integration — no cloud AI providers",
+      "Story libraries for txt, md, docx, and text PDFs",
+      "Evidence-backed suggestions with View Source citations",
+      "Manuscript editor with revise/continue and export",
+    ],
+  },
+  {
+    id: "instructor-locator",
+    title: "Instructor Locator",
+    short:
+      "Offline Windows desktop app for finding instructors and indoor campus directions from a local floor map.",
+    detailed:
+      "Instructor Locator is an offline Windows desktop application that helps campus visitors find instructors, view assigned or scheduled locations, and get indoor directions from a local floor map. It is not a GPS tracker — locations and availability are stored locally. Features include visitor search, multi-floor A* pathfinding, kiosk mode, admin CRUD, a visual map editor, Excel/CSV import-export, and local backup/restore.",
+    tech: ["C#", ".NET 8", "WPF", "SQLite", "EF Core", "MVVM"],
+    image: "/images/instructor-locator-preview.jpg",
+    category: "side",
+    role: "Desktop Developer",
+    year: 2026,
+    private: false,
+    status: "Desktop App",
+    problem:
+      "Campus visitors needed a reliable way to find instructors and indoor routes without internet or GPS.",
+    solution:
+      "Built an offline WPF + SQLite kiosk/desktop app with floor maps, A* pathfinding, and admin tools for schedules and rooms.",
+    highlights: [
+      "Visitor search, profiles, schedules, and availability",
+      "Indoor A* pathfinding with multi-floor routing",
+      "Kiosk mode with inactivity reset",
+      "Admin CRUD, map editor, and Excel/CSV import-export",
+    ],
+  },
+  {
+    id: "loan-management",
+    title: "Loan Management System",
+    short:
+      "Production-style loan, collection, and remittance system with React web and Electron offline desktop.",
+    detailed:
+      "A production-ready loan management stack with React + Vite for web, Electron for offline desktop, and a Node.js + Express API. Covers loan management with auto-calculated totals, daily collections and remittances, expense tracking, income statements, dashboard analytics, CSV/PDF reports, JWT auth, and offline-first desktop sync.",
+    tech: ["React", "Vite", "Electron", "Node.js", "Express", "JWT", "SQLite"],
+    image: "/images/loan-management-preview.jpg",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Production-Ready",
+    problem:
+      "Small lending operations needed structured loan tracking, collections, expenses, and reporting across web and offline desktop.",
+    solution:
+      "Built a shared monorepo with Express API, React UI, and an Electron offline client with background sync.",
+    highlights: [
+      "Loan terms with auto-calculated totals",
+      "Daily collections, remittances, and expense tracking",
+      "Dashboard analytics and report exports",
+      "Electron offline-first desktop with sync",
+    ],
+  },
+  {
+    id: "lead-finder",
+    title: "Camarines Norte Lead Finder",
+    short:
+      "Local business discovery, lead scoring, mapping, and approved Gmail outreach for Camarines Norte.",
+    detailed:
+      "A production-ready web app for discovering legitimate local businesses in Camarines Norte, researching public contacts, analyzing websites, scoring web-development lead potential, mapping businesses, generating personalized outreach emails, and sending only after explicit user approval via controlled Gmail outreach. The system never auto-sends after discovery.",
+    tech: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Leaflet", "Gmail API", "Redis"],
+    image: "/images/lead-finder-preview.jpg",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Local / Production-Ready",
+    problem:
+      "Finding and researching local businesses for web-development outreach was manual and easy to spam without controls.",
+    solution:
+      "Built an approval-first pipeline: find → verify → analyze → score → map → draft email → user approval → controlled send.",
+    highlights: [
+      "Business discovery and public contact research",
+      "Website analysis and lead scoring",
+      "Map view with OpenStreetMap / Leaflet",
+      "Gmail OAuth outreach only after explicit approval",
+    ],
+  },
+  {
+    id: "neurofy",
+    title: "Neurofy",
+    short:
+      "EEG-based mental health screening Android app with OpenBCI BLE and a CNN → CNN-LSTM → CSNN cascade.",
+    detailed:
+      "Neurofy is an EEG-based mental health screening Android application. It connects to an OpenBCI Ganglion board via BLE, records brain activity from frontal electrodes (Fp1, Fp2, F3, F4), and classifies mental state using a three-model cascade (CNN → CNN-LSTM → CSNN). Built with Kotlin, Jetpack Compose, TFLite inference, and flows for device connect, assessment, results, and history.",
+    tech: ["Kotlin", "Jetpack Compose", "BLE", "OpenBCI", "TFLite", "Android"],
+    image: "/images/neurofy-preview.jpg",
+    category: "side",
+    role: "Android / ML Developer",
+    year: 2026,
+    private: false,
+    status: "Research Prototype",
+    problem:
+      "Mental-state screening research needed a mobile path from live EEG capture to on-device classification.",
+    solution:
+      "Built an Android app that streams OpenBCI EEG over BLE and runs a multi-model TFLite classification cascade.",
+    highlights: [
+      "BLE connection to OpenBCI Ganglion",
+      "Frontal electrode recording (Fp1, Fp2, F3, F4)",
+      "Three-model cascade: CNN → CNN-LSTM → CSNN",
+      "Assessment, results, and history screens",
+    ],
+  },
+  {
+    id: "ai-tiktok-automation",
+    title: "AI TikTok Content Automation",
+    short:
+      "Local-first TikTok pipeline from trends and scripts to media render, with human-approved publishing only.",
+    detailed:
+      "A local-first monorepo for TikTok content automation. Phases 1–6 cover projects, trends, ideas, scripts, media, and render. Phase 7 publishes human-approved renders via TikTok Content Posting API / OAuth or a local mock provider — never auto-publishes. Stack includes React/Vite/MUI frontend, Express/TypeScript backend, PostgreSQL/Prisma, and Redis for jobs.",
+    tech: ["React", "Vite", "TypeScript", "Express", "PostgreSQL", "Prisma", "Redis"],
+    image: "/images/tiktok-automation-preview.jpg",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Local Platform",
+    problem:
+      "Creators needed a controlled local pipeline for TikTok ideation-to-render without unsupervised auto-posting.",
+    solution:
+      "Built a phased local platform ending in human-approved publishing via TikTok API or a mock provider.",
+    highlights: [
+      "End-to-end flow: trends → ideas → scripts → media → render",
+      "Human-approved publishing only",
+      "React + Express + PostgreSQL monorepo",
+      "Vitest and Playwright test coverage",
+    ],
+  },
+  {
+    id: "lead-capture",
+    title: "Lead Capture Automation",
+    short:
+      "AI-powered MVP that captures leads, generates personalized replies with OpenAI, and emails automatically.",
+    detailed:
+      "A production-ready MVP that captures leads from a landing form, stores them, generates a personalized reply with OpenAI, and emails the lead automatically via Nodemailer. Includes a separated receiveLead/processLead automation structure (webhook-friendly), file-backed storage adapter, Zod validation, and a simple /admin dashboard of captured leads.",
+    tech: ["Next.js", "TypeScript", "OpenAI", "Nodemailer", "Tailwind CSS", "Zod"],
+    image: "/images/lead-capture-preview.jpg",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "MVP",
+    problem:
+      "Inbound leads needed fast personalized acknowledgment without a heavy CRM setup.",
+    solution:
+      "Built a Next.js MVP: form capture → store → OpenAI reply → automated email, plus an admin lead list.",
+    highlights: [
+      "Landing page lead form",
+      "OpenAI personalized reply generation",
+      "Automated email via Gmail SMTP",
+      "Admin dashboard of captured leads",
+    ],
+  },
+  {
     id: "waste-reporting",
     title: "Paliparan III Waste Reporting",
     short:
