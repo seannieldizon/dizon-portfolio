@@ -9,7 +9,7 @@ export default function Experience(): JSX.Element {
       className="section-shell"
       style={{
         background:
-          "linear-gradient(180deg, #0b1220 0%, #111827 50%, #152033 100%)",
+          "linear-gradient(180deg, rgba(11,18,32,0.72) 0%, rgba(17,24,39,0.72) 50%, rgba(21,32,51,0.72) 100%)",
       }}
       aria-labelledby="experience-heading"
     >

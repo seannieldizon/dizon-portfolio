@@ -11,7 +11,7 @@ export default function Projects() {
       className="section-shell"
       style={{
         background:
-          "linear-gradient(180deg, #0b1220 0%, #070b14 40%, #0b1220 100%)",
+          "linear-gradient(180deg, rgba(11,18,32,0.72) 0%, rgba(7,11,20,0.78) 40%, rgba(11,18,32,0.72) 100%)",
       }}
       aria-labelledby="projects-heading"
     >

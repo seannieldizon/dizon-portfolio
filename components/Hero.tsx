@@ -14,7 +14,7 @@ export default function Hero(): JSX.Element {
       className="relative min-h-[100svh] flex items-center overflow-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 70% 50% at 75% 15%, rgba(94,184,240,0.12), transparent 55%), linear-gradient(165deg, #111827 0%, #0b1220 45%, #070b14 100%)",
+          "radial-gradient(ellipse 70% 50% at 75% 15%, rgba(94,184,240,0.14), transparent 55%), linear-gradient(165deg, rgba(17,24,39,0.55) 0%, rgba(11,18,32,0.5) 45%, rgba(7,11,20,0.65) 100%)",
       }}
       aria-label="Hero"
     >

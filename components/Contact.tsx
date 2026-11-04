@@ -42,7 +42,7 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    value: "Sean Niel Dizon",
+    value: "linkedin.com/in/sean-niel-dizon",
     href: profile.social.linkedin,
     icon: (
       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
@@ -153,7 +153,7 @@ export default function Contact() {
       className="section-shell"
       style={{
         background:
-          "radial-gradient(ellipse at 20% 0%, rgba(94,184,240,0.08), transparent 50%), #070b14",
+          "radial-gradient(ellipse at 20% 0%, rgba(94,184,240,0.1), transparent 50%), rgba(7,11,20,0.78)",
       }}
       aria-labelledby="contact-heading"
     >
@@ -180,22 +180,24 @@ export default function Contact() {
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
                       rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                      className="flex items-center gap-3 rounded-xl px-3 py-3 bg-white/[0.03] border border-white/5 hover:border-primary-400/30 hover:bg-primary-400/5 transition-colors group"
+                      className="flex items-start gap-3 rounded-xl px-3.5 py-3.5 bg-white/[0.05] border border-white/10 hover:border-primary-400/40 hover:bg-primary-400/10 transition-colors group"
                     >
-                      <span className="text-primary-300 group-hover:text-primary-400">
+                      <span className="mt-0.5 shrink-0 text-primary-300 group-hover:text-primary-400">
                         {link.icon}
                       </span>
-                      <span className="min-w-0">
-                        <span className="block text-xs uppercase tracking-wider text-light/50">
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[11px] uppercase tracking-wider text-light/60">
                           {link.label}
                         </span>
-                        <span className="block text-sm text-light truncate">{link.value}</span>
+                        <span className="mt-1 block text-sm font-medium text-light break-all leading-snug">
+                          {link.value}
+                        </span>
                       </span>
                     </a>
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-light/50 pt-2">
+              <p className="text-xs text-light/65 pt-2 leading-relaxed">
                 Based in {profile.location}
               </p>
             </aside>

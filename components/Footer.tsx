@@ -3,7 +3,7 @@ import { profile } from "../data/profile";
 
 export default function Footer() {
   return (
-    <footer className="py-10 border-t border-white/10 bg-[#05080f] text-center">
+    <footer className="py-10 border-t border-white/10 bg-[rgba(5,8,15,0.82)] text-center">
       <div className="max-w-6xl mx-auto px-6 space-y-4">
         <p className="font-display font-semibold text-light">{profile.shortName}</p>
         <p className="text-sm text-light/55">{profile.title}</p>

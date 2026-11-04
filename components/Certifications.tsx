@@ -7,7 +7,7 @@ export default function Certifications(): JSX.Element {
     <section
       id="certifications"
       className="section-shell"
-      style={{ backgroundColor: "#111827" }}
+      style={{ backgroundColor: "rgba(17,24,39,0.72)" }}
       aria-labelledby="certifications-heading"
     >
       <div className="max-w-6xl mx-auto px-6 relative z-10">

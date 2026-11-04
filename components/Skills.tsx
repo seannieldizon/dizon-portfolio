@@ -41,7 +41,7 @@ export default function Skills(): JSX.Element {
     <section
       id="skills"
       className="section-shell"
-      style={{ backgroundColor: "#0b1220" }}
+      style={{ backgroundColor: "rgba(11,18,32,0.72)" }}
       aria-labelledby="skills-heading"
     >
       <div className="max-w-6xl mx-auto px-6 relative z-10">

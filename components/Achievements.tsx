@@ -34,7 +34,7 @@ export default function Achievements(): JSX.Element {
       className="section-shell"
       style={{
         background:
-          "linear-gradient(180deg, #111827 0%, #0b1220 55%, #070b14 100%)",
+          "linear-gradient(180deg, rgba(17,24,39,0.72) 0%, rgba(11,18,32,0.72) 55%, rgba(7,11,20,0.78) 100%)",
       }}
       aria-labelledby="achievements-heading"
     >

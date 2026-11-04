@@ -2,6 +2,7 @@
 import Head from "next/head";
 import Script from "next/script";
 import Navbar from "../components/Navbar";
+import InteractiveBackground from "../components/InteractiveBackground";
 import Hero from "../components/Hero";
 import About from "../components/About";
 import Skills from "../components/Skills";
@@ -91,18 +92,21 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
 
-      <Navbar />
-      <main id="main-content" className="pt-14" role="main">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Certifications />
-        <Projects />
-        <Achievements />
-        <Contact />
-      </main>
-      <Footer />
+      <InteractiveBackground />
+      <div className="relative z-10">
+        <Navbar />
+        <main id="main-content" className="pt-14" role="main">
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Certifications />
+          <Projects />
+          <Achievements />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

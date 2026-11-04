@@ -9,7 +9,7 @@ export default function About(): JSX.Element {
       className="section-shell"
       style={{
         background:
-          "linear-gradient(180deg, #070b14 0%, #0b1220 45%, #111827 100%)",
+          "linear-gradient(180deg, rgba(7,11,20,0.78) 0%, rgba(11,18,32,0.72) 45%, rgba(17,24,39,0.72) 100%)",
       }}
       aria-labelledby="about-heading"
     >
