@@ -99,6 +99,42 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "palsee",
+    title: "PALSEE — Infant Movement Screening",
+    short:
+      "On-device Android screening app that analyzes infant limb motion with MediaPipe Pose — privacy-first, not a diagnosis tool.",
+    detailed:
+      "PALSEE (Pediatric Algorithmic Limb-Motion Signals for Early Evaluation) is a Kotlin + Jetpack Compose Android app for early cerebral palsy risk screening in infants — screening only, not diagnosis. Caregivers or clinicians can live-record or import a short clip of an infant lying on their back. The app runs MediaPipe Pose on-device, extracts spatiotemporal kinematics, builds CORE108 evidence features, and computes a frozen PALSEE V3 / CPRAS screening score — fully offline with no cloud video upload. Features include CameraX capture with pose overlay, assessment history, optional CSV/report export, and English + Filipino localization, with screening-safe disclaimers throughout the UI.",
+    tech: [
+      "Kotlin",
+      "Jetpack Compose",
+      "CameraX",
+      "MediaPipe Pose",
+      "Android",
+      "Material 3",
+    ],
+    image: "/images/palsee-preview.jpg",
+    category: "featured",
+    role: "Android / Computer Vision Developer",
+    year: 2026,
+    private: false,
+    featured: true,
+    status: "Research Prototype",
+    problem:
+      "Early motor risk screening often needs clinic visits and specialized tools, while video ML usually relies on cloud processing.",
+    solution:
+      "Built a fully on-device Android pipeline: camera → pose → kinematics → auditable PALSEE V3 score → results UI.",
+    highlights: [
+      "Live CameraX capture with real-time pose skeleton overlay",
+      "Import existing infant videos from the phone",
+      "33-point landmarks → joint angles → kinematic streams → CORE108 / PALSEE V3 score",
+      "Offline-first: no network required for core capture and scoring",
+      "Assessment history with optional CSV/report export",
+      "English + Filipino localization and screening-only safety copy",
+      "Golden-path unit tests for the frozen mathematical scoring framework",
+    ],
+  },
+  {
     id: "thrustlab",
     title: "ThrustLab",
     short:

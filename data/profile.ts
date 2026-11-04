@@ -184,6 +184,12 @@ export const achievements: Achievement[] = [
     icon: "globe",
   },
   {
+    id: "palsee",
+    title: "PALSEE — Infant Movement Screening",
+    detail: "On-device Android CV screening with MediaPipe Pose",
+    icon: "code",
+  },
+  {
     id: "topcit",
     title: "TOPCIT Level 3",
     detail: "Achieved June 2025",
