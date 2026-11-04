@@ -17,6 +17,7 @@ export default function ProjectCard({
 }) {
   const [open, setOpen] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const hasRepo =
     Boolean(project.repo) &&
@@ -34,9 +35,18 @@ export default function ProjectCard({
     return Array.from(new Set(images));
   }, [project.image, project.gallery]);
 
+  const currentSrc = gallery[activeImage];
+
   useEffect(() => {
-    if (open) setActiveImage(0);
+    if (open) {
+      setActiveImage(0);
+      setImageLoaded(false);
+    }
   }, [open, project.id]);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [activeImage, currentSrc]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -55,8 +65,6 @@ export default function ProjectCard({
       document.body.style.overflow = "";
     };
   }, [open]);
-
-  const currentSrc = gallery[activeImage];
 
   return (
     <>
@@ -222,19 +230,35 @@ export default function ProjectCard({
 
               {gallery.length > 0 && currentSrc && (
                 <div className="mt-5 space-y-3">
-                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-black/40">
+                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-white/10 bg-neutral-700/50">
+                    {!imageLoaded && (
+                      <div
+                        className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-neutral-600/90 to-neutral-700/95"
+                        aria-busy="true"
+                        aria-label="Loading screenshot"
+                      >
+                        <span className="h-9 w-9 rounded-full border-2 border-primary-400/25 border-t-primary-400 animate-spin" />
+                        <span className="text-xs text-light/55 tracking-wide">
+                          Loading preview…
+                        </span>
+                      </div>
+                    )}
                     <Image
                       src={currentSrc}
                       alt={`${project.title} screenshot ${activeImage + 1}`}
                       fill
-                      className={
+                      className={`transition-opacity duration-300 ${
+                        imageLoaded ? "opacity-100" : "opacity-0"
+                      } ${
                         isContainImage(currentSrc)
                           ? "object-contain p-6"
                           : "object-cover object-top"
-                      }
+                      }`}
                       sizes="(max-width: 768px) 100vw, 768px"
                       priority
                       unoptimized={currentSrc.endsWith(".svg")}
+                      onLoadingComplete={() => setImageLoaded(true)}
+                      onLoad={() => setImageLoaded(true)}
                     />
                   </div>
 
