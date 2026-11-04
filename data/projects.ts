@@ -99,6 +99,34 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "thrustlab",
+    title: "ThrustLab",
+    short:
+      "Web-based 3D turbofan engine simulator with AI assistance for aeronautical engineering students.",
+    detailed:
+      "ThrustLab is an interactive 3D learning platform for third-year Aeronautical Engineering students. It teaches gas turbine (turbofan) concepts through immersive exploration, assembly/disassembly, and optional real-time AI-guided explanations. Learning zones include Hangar Zone (history and engine types), Turbofan Engine (rotatable 3D model), Overhaul Station (assembly/disassembly), Test Bay (quizzes), and JAJA AI Assistant for guided Q&A. Deployed at thrustlab-main.vercel.app.",
+    tech: ["Next.js", "React", "TypeScript", "3D Web", "AI Assistant", "Vercel"],
+    image: "/images/thrustlab-preview.svg",
+    demo: "https://thrustlab-main.vercel.app/",
+    category: "featured",
+    role: "Full-Stack / Web Developer",
+    year: 2026,
+    private: false,
+    featured: true,
+    status: "Live",
+    problem:
+      "Turbofan engine concepts are hard to teach with static materials alone — students need hands-on exploration without physical lab constraints.",
+    solution:
+      "Built a web-based interactive 3D simulator with learning zones, quizzes, and an AI assistant specialized in turbofan engines.",
+    highlights: [
+      "Interactive 3D turbofan exploration and component study",
+      "Overhaul station for virtual assembly and disassembly",
+      "Quiz-based Test Bay to reinforce learning retention",
+      "JAJA AI assistant for real-time guided explanations",
+      "Designed for aeronautical engineering coursework (A.Y. 2025–2026)",
+    ],
+  },
+  {
     id: "ignis",
     title: "IGNIS",
     short:
@@ -122,6 +150,134 @@ export const projects: Project[] = [
       "Local workflows that do not send source code to the cloud",
       "Designed for day-to-day developer productivity",
       "Actively under development as a personal product",
+    ],
+  },
+  {
+    id: "waste-reporting",
+    title: "Paliparan III Waste Reporting",
+    short:
+      "Community waste reporting and monitoring system for Barangay Paliparan III, Dasmariñas City.",
+    detailed:
+      "A barangay-level digital platform for residents to report waste issues with photos and location, track collection schedules by zone, and for officials to monitor and respond. Built to improve compliance, reduce illegal dumping, and support cleaner community operations in Paliparan III, Dasmariñas City.",
+    tech: ["Next.js", "React", "TypeScript", "Maps", "Vercel"],
+    image: "/images/waste-reporting-preview.svg",
+    demo: "https://paliparan-iii-waste-reporting.vercel.app/",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Live",
+    problem:
+      "Barangay waste issues were hard to report and track consistently across residents and officials.",
+    solution:
+      "Built a citizen reporting platform with photo/location reports, schedules, analytics, and official monitoring workflows.",
+    highlights: [
+      "Resident reports with map location, photos, and categories",
+      "Collection schedules by zone",
+      "Analytics for response times and compliance",
+      "Truck tracking and route overlays for staff",
+      "Offline-capable reporting with sync when online",
+    ],
+  },
+  {
+    id: "e-paluwagan",
+    title: "e-Paluwagan",
+    short:
+      "Digital paluwagan platform for organizing and managing community savings groups online.",
+    detailed:
+      "e-Paluwagan is a web-based digital paluwagan platform that brings traditional community savings circles online. Deployed as a live application for managing digital paluwagan workflows in a modern web interface.",
+    tech: ["Next.js", "React", "TypeScript", "Vercel"],
+    image: "/images/epaluwagan-preview.svg",
+    demo: "https://e-paluwagan.vercel.app/",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Live",
+    problem:
+      "Traditional paluwagan groups often rely on manual tracking that is hard to share and audit.",
+    solution:
+      "Delivered a digital web platform dedicated to organizing paluwagan participation and records online.",
+    highlights: [
+      "Digital paluwagan web application",
+      "Deployed and accessible online",
+      "Built for community savings workflows",
+    ],
+  },
+  {
+    id: "cop-a-cap",
+    title: "Cop A Cap",
+    short:
+      "Cap storefront for fresh drops with secure sign-in and Philippines-ready checkout vibes.",
+    detailed:
+      "Cop A Cap is a product-focused web storefront for caps and streetwear accessories. The site highlights fresh drops, secure sign-in, OTP-protected flows, and a local checkout experience aimed at Philippine shoppers.",
+    tech: ["Next.js", "React", "TypeScript", "Vercel"],
+    image: "/images/copacap-preview.svg",
+    demo: "https://cop-a-cap.vercel.app/",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Live",
+    problem:
+      "Needed a modern storefront to showcase and sell cap drops with secure account and checkout flows.",
+    solution:
+      "Built a branded e-commerce style web experience with product storytelling, auth, and local checkout orientation.",
+    highlights: [
+      "Product landing experience for cap drops",
+      "Secure sign-in and OTP-protected flows",
+      "Philippines-ready checkout presentation",
+    ],
+  },
+  {
+    id: "busbar-forecast",
+    title: "Busbar Overload Forecasting",
+    short:
+      "Dashboard for forecasting busbar overloading with linear regression and MATLAB model metrics.",
+    detailed:
+      "A field-ready dashboard for monitoring peak and average electrical load, forecasting busbar overload risk using MATLAB linear regression, and reviewing model quality metrics (R², RMSE, MAPE). Built for tablet use with MCB readings and daily/weekly constraint status against rated capacity.",
+    tech: ["Next.js", "React", "TypeScript", "MATLAB", "Linear Regression", "Vercel"],
+    image: "/images/busbar-preview.svg",
+    demo: "https://busbar-nine.vercel.app/",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Live",
+    problem:
+      "Operators needed an early view of busbar overload risk instead of reacting after capacity is exceeded.",
+    solution:
+      "Built a dashboard that combines load monitoring, MATLAB linear-regression forecasts, and model-check metrics for field use.",
+    highlights: [
+      "Load forecast using MATLAB linear regression",
+      "Model reliability metrics: R², RMSE, and MAPE",
+      "Daily/weekly normal vs abnormal loading status",
+      "Tablet-oriented UI for field monitoring",
+    ],
+  },
+  {
+    id: "cott-lab",
+    title: "CoTT Laboratory Reservation",
+    short:
+      "Laboratory reservation system for booking facilities, tools, and equipment.",
+    detailed:
+      "CoTT Laboratory Reservation System helps students, faculty, and laboratory staff manage facility and equipment bookings. Students and faculty can reserve resources and track schedules, while staff can approve or reject requests and manage availability.",
+    tech: ["Next.js", "React", "TypeScript", "Vercel"],
+    image: "/images/cottlab-preview.svg",
+    demo: "https://cott-lab-web.vercel.app/",
+    category: "side",
+    role: "Full-Stack Developer",
+    year: 2026,
+    private: false,
+    status: "Live",
+    problem:
+      "Laboratory bookings were hard to coordinate across students, faculty, and staff without a shared system.",
+    solution:
+      "Built a reservation web app for requesting, approving, and managing laboratory facilities and equipment.",
+    highlights: [
+      "Reservation flows for students and faculty",
+      "Staff tools to approve/reject bookings",
+      "Facility and equipment availability management",
     ],
   },
   {

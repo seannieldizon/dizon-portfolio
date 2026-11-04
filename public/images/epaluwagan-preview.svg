@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#0b1220"/>
+  <rect x="72" y="72" width="1056" height="531" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(232,238,247,0.12)" stroke-width="2"/>
+  <text x="120" y="250" fill="#e8eef7" font-family="Georgia, serif" font-size="56" font-weight="700">e-Paluwagan</text>
+  <text x="120" y="320" fill="#5eb8f0" font-family="system-ui, sans-serif" font-size="26" font-weight="600">Digital Paluwagan Platform</text>
+  <text x="120" y="380" fill="rgba(232,238,247,0.7)" font-family="system-ui, sans-serif" font-size="22">Community savings · Web app</text>
+  <rect x="120" y="430" width="140" height="44" rx="22" fill="rgba(94,184,240,0.16)" stroke="#5eb8f0" stroke-width="1.5"/>
+  <text x="190" y="458" text-anchor="middle" fill="#5eb8f0" font-family="system-ui, sans-serif" font-size="16" font-weight="600">Live</text>
+</svg>

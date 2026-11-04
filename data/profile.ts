@@ -178,6 +178,12 @@ export const achievements: Achievement[] = [
     icon: "globe",
   },
   {
+    id: "thrustlab",
+    title: "ThrustLab — 3D Learning Simulator",
+    detail: "Interactive turbofan engine platform with AI assistance",
+    icon: "globe",
+  },
+  {
     id: "topcit",
     title: "TOPCIT Level 3",
     detail: "Achieved June 2025",
