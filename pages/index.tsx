@@ -93,7 +93,7 @@ export default function Home() {
       />
 
       <InteractiveBackground />
-      <div className="relative z-10">
+      <div className="relative z-[2]">
         <Navbar />
         <main id="main-content" className="pt-14" role="main">
           <Hero />

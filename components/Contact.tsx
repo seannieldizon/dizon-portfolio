@@ -152,8 +152,7 @@ export default function Contact() {
       id="contact"
       className="section-shell"
       style={{
-        background:
-          "radial-gradient(ellipse at 20% 0%, rgba(94,184,240,0.1), transparent 50%), rgba(7,11,20,0.78)",
+        background: "rgba(7,11,20,0.28)",
       }}
       aria-labelledby="contact-heading"
     >

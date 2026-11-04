@@ -13,35 +13,10 @@ export default function Hero(): JSX.Element {
       id="home"
       className="relative min-h-[100svh] flex items-center overflow-hidden"
       style={{
-        background:
-          "radial-gradient(ellipse 70% 50% at 75% 15%, rgba(94,184,240,0.14), transparent 55%), linear-gradient(165deg, rgba(17,24,39,0.55) 0%, rgba(11,18,32,0.5) 45%, rgba(7,11,20,0.65) 100%)",
+        background: "transparent",
       }}
       aria-label="Hero"
     >
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(232,238,247,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(232,238,247,0.5) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-            maskImage: "radial-gradient(ellipse at center, black 20%, transparent 75%)",
-          }}
-        />
-        <motion.div
-          className="absolute -top-24 right-[10%] h-80 w-80 rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(94,184,240,0.12)" }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.45, 0.75, 0.45] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-[5%] h-96 w-96 rounded-full blur-3xl"
-          style={{ backgroundColor: "rgba(58,160,224,0.08)" }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-24 md:py-28">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
           <motion.div

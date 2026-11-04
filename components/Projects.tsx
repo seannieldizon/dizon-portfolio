@@ -10,8 +10,7 @@ export default function Projects() {
       id="projects"
       className="section-shell"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(11,18,32,0.72) 0%, rgba(7,11,20,0.78) 40%, rgba(11,18,32,0.72) 100%)",
+        background: "rgba(11,18,32,0.3)",
       }}
       aria-labelledby="projects-heading"
     >

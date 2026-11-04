@@ -33,8 +33,7 @@ export default function Achievements(): JSX.Element {
       id="achievements"
       className="section-shell"
       style={{
-        background:
-          "linear-gradient(180deg, rgba(17,24,39,0.72) 0%, rgba(11,18,32,0.72) 55%, rgba(7,11,20,0.78) 100%)",
+        background: "rgba(11,18,32,0.3)",
       }}
       aria-labelledby="achievements-heading"
     >
