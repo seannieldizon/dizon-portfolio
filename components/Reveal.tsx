@@ -1,56 +1,45 @@
-// components/Reveal.tsx
-import { motion, Variants } from "framer-motion";
-import { ReactNode } from "react";
+// components/Reveal.tsx — one-time, restrained fade-up on scroll.
+// Pure CSS + IntersectionObserver (no animation library). Content stays
+// visible without JavaScript and under prefers-reduced-motion.
+import { ReactNode, useEffect, useRef } from "react";
 
-interface RevealProps {
+type Props = {
   children: ReactNode;
+  className?: string;
+  /** Delay in milliseconds, for gentle staggering within a group. */
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "fade";
-  duration?: number;
-}
+};
 
-export default function Reveal({ 
-  children, 
-  delay = 0, 
-  direction = "up",
-  duration = 0.6 
-}: RevealProps) {
-  const variants: Record<string, Variants> = {
-    up: {
-      hidden: { opacity: 0, y: 30 },
-      visible: { opacity: 1, y: 0 }
-    },
-    down: {
-      hidden: { opacity: 0, y: -30 },
-      visible: { opacity: 1, y: 0 }
-    },
-    left: {
-      hidden: { opacity: 0, x: -30 },
-      visible: { opacity: 1, x: 0 }
-    },
-    right: {
-      hidden: { opacity: 0, x: 30 },
-      visible: { opacity: 1, x: 0 }
-    },
-    fade: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 }
+export default function Reveal({ children, className = "", delay = 0 }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      el.classList.add("is-visible");
+      return;
     }
-  };
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <motion.div
-      variants={variants[direction]}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{
-        duration,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay
-      }}
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

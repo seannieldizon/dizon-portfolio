@@ -1,217 +1,108 @@
 // components/Navbar.tsx
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { profile } from "../data/profile";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const navLinks = [
-  { href: "#about", label: "About", id: "about" },
-  { href: "#skills", label: "Skills", id: "skills" },
-  { href: "#experience", label: "Experience", id: "experience" },
-  { href: "#projects", label: "Projects", id: "projects" },
-  { href: "#achievements", label: "Achievements", id: "achievements" },
-  { href: "#contact", label: "Contact", id: "contact" },
-];
-
-const sectionIds = [
-  "home",
-  "about",
-  "skills",
-  "experience",
-  "certifications",
-  "projects",
-  "achievements",
-  "contact",
+const links = [
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 140;
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sectionIds[i]);
-        if (section && scrollPosition >= section.offsetTop) {
-          setActiveSection(sectionIds[i]);
-          return;
-        }
-      }
-      setActiveSection("home");
-    };
-
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
-    };
-  }, []);
-
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 768 && open) setOpen(false);
-    };
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onResize = () => window.innerWidth >= 900 && setOpen(false);
+    window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [open]);
-
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open) setOpen(false);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
     };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
   }, [open]);
 
-  const scrollToElement = (el: HTMLElement | null) => {
-    if (!el) return;
-    const headerEl = document.querySelector("header");
-    const headerHeight = headerEl?.getBoundingClientRect().height ?? 0;
-    const top = window.scrollY + el.getBoundingClientRect().top - headerHeight - 8;
-    window.scrollTo({ top, behavior: "smooth" });
-  };
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement> | undefined,
-    href: string
-  ) => {
-    if (e) e.preventDefault();
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (!el) {
-      setOpen(false);
-      return;
-    }
-    if (open) {
-      setOpen(false);
-      setTimeout(() => scrollToElement(el), 240);
-    } else {
-      scrollToElement(el);
-    }
-  };
+  const close = () => setOpen(false);
 
   return (
-    <motion.header
-      className="fixed inset-x-0 top-0 z-50"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      aria-label="Primary navigation"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
+        scrolled || open
+          ? "border-b border-line bg-paper/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
     >
-      <div
-        className={`transition-all duration-300 border-b ${
-          scrolled
-            ? "bg-neutral-500/85 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20"
-            : "bg-transparent border-transparent"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between gap-4">
-          <a
-            href="#home"
-            className="font-display font-bold text-light text-base md:text-lg tracking-tight shrink-0"
-            onClick={(e) => handleNavClick(e, "#home")}
-          >
-            {profile.shortName}
-          </a>
+      <div className="container-x flex h-[72px] items-center justify-between gap-6">
+        <Link href="/" className="group flex items-baseline gap-2" onClick={close}>
+          <span className="font-display text-xl font-semibold tracking-tight text-ink">Sean Niel Dizon</span>
+          <span className="hidden text-xs font-medium text-muted sm:inline">Websites &amp; business systems</span>
+        </Link>
 
-          <nav className="hidden lg:flex items-center gap-1 text-sm" aria-label="Main navigation">
-            {navLinks.map((link) => {
-              const isActive =
-                activeSection === link.id ||
-                (link.id === "experience" && activeSection === "certifications");
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-1.5 rounded-lg transition-colors ${
-                    isActive
-                      ? "text-primary-300 bg-primary-400/10 font-semibold"
-                      : "text-light/70 hover:text-primary-300 hover:bg-white/5"
-                  }`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
-            <a
-              href={profile.resumePath}
-              download
-              className="ml-2 btn-secondary !px-3.5 !py-1.5 text-sm"
+        <nav aria-label="Main" className="hidden items-center gap-1 min-[900px]:flex">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="rounded-full px-3.5 py-2 text-[0.95rem] font-medium text-ink-soft transition-colors hover:text-accent"
             >
-              Resume
-            </a>
-          </nav>
+              {l.label}
+            </Link>
+          ))}
+          <Link href="/#contact" className="btn-primary ml-3 !min-h-[42px] !px-5 !text-sm">
+            Discuss your project
+          </Link>
+        </nav>
 
-          <button
-            type="button"
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-light/90 hover:text-primary-300 hover:bg-white/5"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-              {open ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h16M4 16h16" />
-              )}
-            </svg>
-          </button>
-        </div>
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-ink min-[900px]:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            {open ? (
+              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path strokeLinecap="round" d="M4 8h16M4 16h16" />
+            )}
+          </svg>
+        </button>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            className="lg:hidden bg-neutral-500/95 backdrop-blur-xl border-b border-white/10"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            role="menu"
-          >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.id;
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-3 py-2.5 rounded-lg ${
-                      isActive
-                        ? "text-primary-300 font-semibold bg-primary-400/10"
-                        : "text-light/80 hover:bg-white/5"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                );
-              })}
-              <a
-                href={profile.resumePath}
-                download
-                className="mt-2 btn-secondary text-center text-sm"
-              >
-                Download Resume
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      <div
+        id="mobile-menu"
+        hidden={!open}
+        className="border-t border-line bg-paper min-[900px]:hidden"
+      >
+        <nav aria-label="Mobile" className="container-x flex flex-col py-4">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={close}
+              className="border-b border-line py-3.5 font-display text-2xl text-ink last:border-0"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <Link href="/#contact" onClick={close} className="btn-primary mt-4 w-full">
+            Discuss your project
+          </Link>
+        </nav>
+      </div>
+    </header>
   );
 }

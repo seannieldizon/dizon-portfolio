@@ -1,34 +1,41 @@
 // data/profile.ts — centralized profile content for the portfolio
 
+/**
+ * HotVibes user figure. Sean's résumé and the previous site say "8,000+";
+ * a later brief mentions "more than 10,000". The conservative, documented
+ * figure is used until the higher number is confirmed. Change it here only.
+ */
+export const HOTVIBES_USERS = "8,000+";
+
 export const profile = {
   name: "Sean Niel S. Dizon",
   shortName: "Sean Niel Dizon",
-  title: "Full-Stack Software Developer",
-  subtitle:
-    "Building production web apps, mobile experiences, AI-powered tools, automation workflows, and REST APIs with modern JavaScript frameworks.",
+  firstName: "Sean",
+  title: "Full-Stack Developer",
+  positioning:
+    "Independent full-stack developer building websites and business systems for owners who want more customers and less manual work.",
   email: "saynoseanniel@gmail.com",
   phone: "0961-042-4462",
   phoneHref: "tel:+639610424462",
+  /** Full address kept for the résumé; the site shows only `publicLocation`. */
   location: "Purok 3, Sto. Domingo, Vinzons, Camarines Norte, Philippines",
-  siteUrl: "https://seannieldizon.dev",
+  publicLocation: "Camarines Norte, Philippines",
+  /**
+   * `seannieldizon.dev` did not resolve in November 2026, so the Vercel URL is the
+   * default. Set NEXT_PUBLIC_SITE_URL in Vercel once a custom domain is live.
+   */
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://dizon-portfolio.vercel.app",
   resumePath: "/Resume-Dizon_2.0.pdf",
   photo: "/images/dizon-formal.jpg",
+  freelanceSince: "June 2024",
   social: {
     github: "https://github.com/seannieldizon",
     linkedin: "https://linkedin.com/in/sean-niel-dizon-296b49382",
   },
   about: [
-    "I am a Bachelor of Science in Information Technology graduate and a Full-Stack Software Developer focused on practical web, mobile, and AI-assisted solutions.",
-    "I maintain HotVibes, a live creator platform with 8,000+ users, and build client systems across React, Node.js, Flutter, and related stacks. I care about clean interfaces, reliable backends, and software that holds up in production.",
-    "I am Civil Service eligible (Professional Level) and continuously learn new tools while delivering maintainable work for clients, internships, and personal products.",
-  ],
-  heroFocus: [
-    "Web Development",
-    "Mobile Development",
-    "AI Applications",
-    "IoT & Embedded",
-    "REST APIs",
-    "Production Systems",
+    "I'm Sean Niel Dizon, a full-stack developer from Camarines Norte, Philippines. Since June 2024 I've worked independently, building websites, web and mobile apps, and business systems for clients and for my own products.",
+    "I handle a project end to end: understanding the business problem, designing the experience, building the database and back-office, and putting it online. That means fewer hand-offs and one person who understands the whole system.",
+    "I care about software that people actually use: fast pages, clear screens, records that add up, and an honest explanation of what a solution will and won't do for your business.",
   ],
 } as const;
 
@@ -59,38 +66,28 @@ export const education: EducationEntry[] = [
 export type Certification = {
   title: string;
   level?: string;
-  passed: string;
+  date: string;
   issuer?: string;
-  description?: string;
-  dateLabel?: string;
 };
 
 export const certifications: Certification[] = [
   {
-    title: "Civil Service Examination",
+    title: "Civil Service Eligibility",
     level: "Professional Level",
-    passed: "March 2026",
+    date: "Passed March 2026",
     issuer: "Civil Service Commission",
-    description:
-      "Professional eligibility for government and public-sector roles in the Philippines.",
-    dateLabel: "Passed",
   },
   {
     title: "TOPCIT",
     level: "Level 3",
-    passed: "June 2025",
+    date: "Achieved June 2025",
     issuer: "Test of Practical Competency in IT",
-    description: "Practical IT competency assessment covering applied technical skills.",
-    dateLabel: "Achieved",
   },
   {
-    title: "TESDA Computer Systems Servicing (CSS) NC II",
+    title: "Computer Systems Servicing NC II",
     level: "Trainee",
-    passed: "Training completed",
+    date: "Training completed",
     issuer: "TESDA",
-    description:
-      "Computer systems servicing training covering assembly, troubleshooting, and related support skills.",
-    dateLabel: "Status",
   },
 ];
 
@@ -98,107 +95,29 @@ export type ExperienceEntry = {
   role: string;
   company: string;
   period: string;
-  type: string;
-  responsibilities: string[];
+  summary: string;
 };
 
 export const experience: ExperienceEntry[] = [
   {
-    role: "Freelance Developer",
-    company: "Self-Employed",
+    role: "Independent Developer",
+    company: "Self-employed",
     period: "June 2024 — Present",
-    type: "Freelance",
-    responsibilities: [
-      "Design and develop AI/ML-assisted, web, mobile, and IoT solutions for clients and personal products",
-      "Build responsive full-stack web apps with React.js, Node.js, Express.js, and MongoDB",
-      "Develop cross-platform Flutter apps and integrate REST APIs and backend services",
-      "Create IoT and embedded prototypes with ESP32, Arduino, and Raspberry Pi",
-      "Provide troubleshooting, optimization, and end-to-end technical support",
-      "Maintain HotVibes — a live creator platform with 8,000+ users",
-    ],
+    summary:
+      "Websites, web and mobile apps, business systems, automation and AI-assisted tools for clients and personal products. Built and maintained the HotVibes platform while it was online.",
+  },
+  {
+    role: "Web Developer (contract)",
+    company: "Grand Eleva Prime Properties Co.",
+    period: "June 2025 — August 2025",
+    summary:
+      "Built a web system for managing client, property and transaction records, working from requirements gathered with the company's stakeholders.",
   },
   {
     role: "Student Intern",
     company: "LGU Talisay — Office of the Municipal Engineer",
     period: "February 2026 — May 2026",
-    type: "Internship",
-    responsibilities: [
-      "Assisted in document processing, filing, encoding, and scanning of engineering records",
-      "Provided technical support and basic troubleshooting for office equipment and systems",
-      "Participated in field inspections and documentation of infrastructure projects",
-      "Supported data management, report preparation, and office administrative tasks",
-      "Gained experience in government office operations, teamwork, and professional communication",
-    ],
-  },
-  {
-    role: "Web Developer",
-    company: "Grand Eleva Prime Properties Co.",
-    period: "June 2025 — August 2025",
-    type: "Contract",
-    responsibilities: [
-      "Developed a web-based system for managing client and transaction records",
-      "Implemented features for adding, updating, and tracking client and property data",
-      "Built the frontend with React.js and the backend with Node.js and MongoDB",
-      "Ensured secure data handling and optimized database performance",
-      "Collaborated with stakeholders to gather requirements and deliver a usable solution",
-    ],
-  },
-];
-
-export type Achievement = {
-  id: string;
-  title: string;
-  detail: string;
-  icon: "badge" | "grad" | "globe" | "code";
-};
-
-export const achievements: Achievement[] = [
-  {
-    id: "csc",
-    title: "Civil Service Professional Eligibility",
-    detail: "Passed March 2026",
-    icon: "badge",
-  },
-  {
-    id: "bsit",
-    title: "BS Information Technology Graduate",
-    detail: "Camarines Norte State College · Graduated June 2026",
-    icon: "grad",
-  },
-  {
-    id: "hotvibes",
-    title: "HotVibes — Live Creator Platform",
-    detail: "Maintaining a production platform with 8,000+ users",
-    icon: "globe",
-  },
-  {
-    id: "beloved",
-    title: "Beloved — Digital Invitation Showcase",
-    detail: "40 interactive invitation designs across 8 occasions",
-    icon: "globe",
-  },
-  {
-    id: "thrustlab",
-    title: "ThrustLab — 3D Learning Simulator",
-    detail: "Interactive turbofan engine platform with AI assistance",
-    icon: "globe",
-  },
-  {
-    id: "palsee",
-    title: "PALSEE — Infant Movement Screening",
-    detail: "On-device Android CV screening with MediaPipe Pose",
-    icon: "code",
-  },
-  {
-    id: "topcit",
-    title: "TOPCIT Level 3",
-    detail: "Achieved June 2025",
-    icon: "badge",
-  },
-  {
-    id: "freelance",
-    title: "Freelance Software Developer",
-    detail: "June 2024 — Present · Web, mobile, AI, and IoT solutions",
-    icon: "code",
+    summary:
+      "Records processing and encoding, technical support, field inspection documentation and report preparation inside a government office.",
   },
 ];

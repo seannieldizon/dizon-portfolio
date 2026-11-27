@@ -2,207 +2,154 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-strong);
-}
-
-/*
-  Soft slate + sky — easy on the eyes, high readability.
-  Avoids muddy olive greens and warm clay/cream contrast.
-*/
-:root {
-  --bg: #0b1220;
-  --bg-elevated: #111827;
-  --bg-soft: #152033;
-  --bg-deep: #070b14;
-
-  --text: #e8eef7;
-  --text-muted: #9aa8bc;
-  --text-faint: #6b7a90;
-
-  --accent: #5eb8f0;
-  --accent-strong: #3aa0e0;
-  --accent-soft: rgba(94, 184, 240, 0.14);
-  --accent-border: rgba(94, 184, 240, 0.28);
-
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-border: rgba(232, 238, 247, 0.1);
-  --muted: rgba(232, 238, 247, 0.72);
-
-  /* Legacy aliases kept so older class names still resolve */
-  --black-forest-500: var(--bg);
-  --black-forest-300: var(--bg-soft);
-  --sunlit-clay-500: var(--accent);
-  --sunlit-clay-600: var(--accent-strong);
-  --cornsilk-500: var(--text);
-  --copperwood-500: var(--accent-strong);
-}
-
-html,
-body,
-#__next {
-  height: 100%;
-  background-color: var(--bg);
-  color: var(--text);
-}
-
-::selection {
-  background: rgba(94, 184, 240, 0.35);
-  color: var(--text);
-}
-
-.section-shell {
-  @apply py-20 md:py-28 relative overflow-hidden;
-}
-
-.section-title {
-  @apply font-display text-3xl md:text-4xl font-bold tracking-tight text-light;
-}
-
-.section-lead {
-  @apply mt-3 text-base md:text-lg max-w-2xl;
-  color: var(--text-muted);
-}
-
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300;
-  background: linear-gradient(135deg, #5eb8f0, #3aa0e0);
-  color: #071018;
-  box-shadow: 0 8px 24px rgba(58, 160, 224, 0.22);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(58, 160, 224, 0.3);
-}
-
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold border transition-all duration-300;
-  border-color: var(--accent-border);
-  color: var(--accent);
-  background: var(--accent-soft);
-}
-
-.btn-secondary:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: rgba(94, 184, 240, 0.2);
-}
-
-.btn-ghost {
-  @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all duration-300;
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.btn-ghost:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent-border);
-}
-
-.btn-mint {
-  @apply btn-primary;
-}
-
-.btn-outline-mint {
-  @apply btn-secondary;
-}
-
-.card-glass {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid var(--surface-border);
-  box-shadow: 0 10px 40px rgba(2, 6, 23, 0.4);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-glass:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-border);
-  box-shadow: 0 16px 48px rgba(58, 160, 224, 0.1);
-}
-
-.tech-badge {
-  @apply inline-flex items-center text-xs px-2.5 py-1 rounded-full font-medium;
-  background: var(--accent-soft);
-  color: var(--text);
-  border: 1px solid var(--accent-border);
-}
-
-:where(button, a, input, textarea, select):focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(94, 184, 240, 0.2);
-  border-radius: 6px;
-}
-
-:where(button, a, input, textarea, select):focus:not(:focus-visible) {
-  outline: none;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.sr-only:focus,
-.focus\:not-sr-only:focus {
-  position: static;
-  width: auto;
-  height: auto;
-  padding: inherit;
-  margin: inherit;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
-}
-
-a {
-  text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "ss01";
+    text-rendering: optimizeLegibility;
   }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    font-variation-settings: "opsz" 72;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-accent text-white;
+  }
+
+  /* Anchor targets clear the fixed header. */
+  [id] {
+    scroll-margin-top: 88px;
+  }
+
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid #b8441a;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ───────────────────────── Components ───────────────────────── */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.14em] text-accent;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-6 bg-current;
+  }
+
+  .h-section {
+    @apply font-display text-display-lg font-medium;
+  }
+
+  .label-caps {
+    @apply font-sans text-sm font-semibold uppercase tracking-[0.12em];
+  }
+
+  .lead {
+    @apply text-lg leading-relaxed text-ink-soft md:text-xl;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 text-[0.95rem] font-semibold transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-paper hover:bg-accent;
+  }
+
+  .btn-secondary {
+    @apply btn border border-ink/80 text-ink hover:bg-ink hover:text-paper;
+  }
+
+  .btn-light {
+    @apply btn bg-paper text-ink hover:bg-accent hover:text-white;
+  }
+
+  .btn-outline-light {
+    @apply btn border border-paper/40 text-paper hover:border-paper hover:bg-paper/10;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 font-semibold text-ink underline decoration-line-strong decoration-1 underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent;
+  }
+
+  .card {
+    @apply rounded-card border border-line bg-card;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink-soft;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line-strong bg-white px-4 py-3 text-base text-ink placeholder:text-muted/70 transition-colors focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10;
+  }
+
+  .field-select {
+    @apply field cursor-pointer appearance-none pr-10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2315171B' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px 8px;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+}
+
+/* ───────────────────────── Motion ───────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Without JS, never hide content. */
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   *,
