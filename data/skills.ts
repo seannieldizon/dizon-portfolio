@@ -1,74 +1,96 @@
-// data/skills.ts — tech stack aligned with resume
+// data/skills.ts — technical capabilities, grouped by what they're used for.
+// "Used in" names portfolio projects where the technology appears, so every
+// claim can be traced. Items marked `resumeOnly` are listed on Sean's résumé
+// but not shown in a portfolio project here.
 
-export type Skill = { name: string; icon: string };
+export type Capability = { name: string; resumeOnly?: boolean };
 
-export type SkillGroup = { title: string; items: Skill[] };
+export type CapabilityGroup = {
+  title: string;
+  description: string;
+  items: Capability[];
+  usedIn: string[];
+};
 
-export const skillGroups: SkillGroup[] = [
+export const capabilityGroups: CapabilityGroup[] = [
   {
-    title: "Languages",
+    title: "Websites & web apps",
+    description: "Fast, responsive interfaces and full web applications.",
     items: [
-      { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E" },
-      { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/3178C6" },
-      { name: "Dart", icon: "https://cdn.simpleicons.org/dart/0175C2" },
-      { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB" },
-      { name: "HTML", icon: "https://cdn.simpleicons.org/html5/E34F26" },
-      { name: "CSS", icon: "https://cdn.simpleicons.org/css/1572B6" },
+      { name: "React" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
+      { name: "JavaScript" },
+      { name: "Tailwind CSS" },
+      { name: "Vite" },
     ],
+    usedIn: ["Beloved", "CoTT Reservation", "Lead Capture", "Loan Management"],
   },
   {
-    title: "Frontend",
+    title: "Back-end, APIs & data",
+    description: "Business logic, secure accounts, payments flows and databases.",
     items: [
-      { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
-      { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/FFFFFF" },
-      { name: "Vite", icon: "https://cdn.simpleicons.org/vite/646CFF" },
-      { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+      { name: "Node.js" },
+      { name: "Express" },
+      { name: "REST APIs" },
+      { name: "JWT auth" },
+      { name: "Socket.IO" },
+      { name: "Prisma" },
+      { name: "PostgreSQL" },
+      { name: "MongoDB" },
+      { name: "SQLite" },
+      { name: "Redis" },
+      { name: "Django", resumeOnly: true },
+      { name: "MySQL", resumeOnly: true },
+      { name: "Firebase", resumeOnly: true },
+      { name: "Supabase", resumeOnly: true },
     ],
+    usedIn: ["HotVibes", "Grand Eleva", "Loan Management", "Lead Finder"],
   },
   {
-    title: "Backend & APIs",
+    title: "Mobile & desktop",
+    description: "Apps for phones, kiosks and offline office use.",
     items: [
-      { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/339933" },
-      { name: "Express", icon: "https://cdn.simpleicons.org/express/FFFFFF" },
-      { name: "Django", icon: "https://cdn.simpleicons.org/django/092E20" },
-      { name: "REST APIs", icon: "https://cdn.simpleicons.org/fastapi/009688" },
-      { name: "Prisma", icon: "https://cdn.simpleicons.org/prisma/FFFFFF" },
-      { name: "Socket.IO", icon: "https://cdn.simpleicons.org/socketdotio/FFFFFF" },
-      { name: "Redis", icon: "https://cdn.simpleicons.org/redis/DC382D" },
-      { name: "JWT", icon: "https://cdn.simpleicons.org/jsonwebtokens/FFFFFF" },
+      { name: "Flutter / Dart" },
+      { name: "Kotlin / Jetpack Compose" },
+      { name: "Electron" },
+      { name: "C# / .NET (WPF)" },
     ],
+    usedIn: ["MOVE-E", "PALSEE", "Loan Management (desktop)", "Instructor Locator"],
   },
   {
-    title: "Mobile",
+    title: "AI & automation",
+    description: "Practical AI features and workflow automation.",
     items: [
-      { name: "Flutter", icon: "https://cdn.simpleicons.org/flutter/02569B" },
-      { name: "Dart", icon: "https://cdn.simpleicons.org/dart/0175C2" },
+      { name: "OpenAI API" },
+      { name: "Ollama (local LLMs)" },
+      { name: "MediaPipe" },
+      { name: "TensorFlow Lite" },
+      { name: "Python" },
+      { name: "Gmail API / SMTP email" },
+      { name: "Background job queues" },
     ],
+    usedIn: ["Lead Capture", "Lead Finder", "AI TikTok Automation", "Storyforge", "PALSEE"],
   },
   {
-    title: "Databases",
+    title: "Deployment & tools",
+    description: "Getting software online and keeping it maintainable.",
     items: [
-      { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/4169E1" },
-      { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A248" },
-      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
-      { name: "SQLite", icon: "https://cdn.simpleicons.org/sqlite/003B57" },
-      { name: "Firebase", icon: "https://cdn.simpleicons.org/firebase/FFCA28" },
-      { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase/3ECF8E" },
+      { name: "Vercel" },
+      { name: "Render" },
+      { name: "Hostinger" },
+      { name: "Git & GitHub" },
+      { name: "Vitest / Playwright" },
+      { name: "Docker", resumeOnly: true },
+      { name: "Postman", resumeOnly: true },
+      { name: "Figma", resumeOnly: true },
     ],
+    usedIn: ["HotVibes", "Live demos on Vercel", "AI TikTok Automation"],
   },
   {
-    title: "Cloud, Tools & IoT",
-    items: [
-      { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032" },
-      { name: "GitHub", icon: "https://cdn.simpleicons.org/github/FFFFFF" },
-      { name: "Docker", icon: "https://cdn.simpleicons.org/docker/2496ED" },
-      { name: "Render", icon: "https://cdn.simpleicons.org/render/46E3B7" },
-      { name: "Hostinger", icon: "https://cdn.simpleicons.org/hostinger/673DE6" },
-      { name: "Postman", icon: "https://cdn.simpleicons.org/postman/FF6C37" },
-      { name: "Figma", icon: "https://cdn.simpleicons.org/figma/F24E1E" },
-      { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/00878F" },
-      { name: "Raspberry Pi", icon: "https://cdn.simpleicons.org/raspberrypi/A22846" },
-      { name: "Cursor", icon: "https://cdn.simpleicons.org/cursor/FFFFFF" },
-    ],
+    title: "IoT & embedded",
+    description: "Connecting software to sensors, cameras and hardware.",
+    items: [{ name: "ESP32" }, { name: "Arduino" }, { name: "Raspberry Pi" }, { name: "Bluetooth LE" }],
+    usedIn: ["CCTV Pan–Tilt", "SERVE", "Neurofy", "EduVision"],
   },
 ];

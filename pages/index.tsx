@@ -1,112 +1,80 @@
-// pages/index.tsx
-import Head from "next/head";
-import Script from "next/script";
-import Navbar from "../components/Navbar";
-import InteractiveBackground from "../components/InteractiveBackground";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import Skills from "../components/Skills";
-import Experience from "../components/Experience";
-import Certifications from "../components/Certifications";
-import Projects from "../components/Projects";
-import Achievements from "../components/Achievements";
-import Contact from "../components/Contact";
-import Footer from "../components/Footer";
-import { generatePersonSchema } from "../lib/utils";
+// pages/index.tsx — homepage conversion journey:
+// value → problem → solution → proof → process → about → contact
+import Layout from "../components/Layout";
+import Seo, { absoluteUrl } from "../components/Seo";
+import Hero from "../components/home/Hero";
+import Problems from "../components/home/Problems";
+import Services from "../components/home/Services";
+import SelectedWork from "../components/home/SelectedWork";
+import Trust from "../components/home/Trust";
+import Process from "../components/home/Process";
+import About from "../components/home/About";
+import Capabilities from "../components/home/Capabilities";
+import Faq from "../components/home/Faq";
+import Contact from "../components/home/Contact";
+import CtaBand from "../components/CtaBand";
 import { profile } from "../data/profile";
+import { faqs } from "../data/services";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || profile.siteUrl;
-const siteName = `${profile.shortName} — Portfolio`;
-const title = `${profile.shortName} — Full-Stack Software Developer`;
+const title = "Sean Niel Dizon | Websites & Business Systems That Help Businesses Grow";
 const description =
-  "Full-Stack Software Developer specializing in web development, mobile apps, AI applications, automation, and REST APIs. BS IT graduate building production-ready software. View projects including hotvibes.vip.";
+  "Independent full-stack developer in the Philippines building conversion-focused websites, booking and lead-capture systems, and custom business software that brings in customers and reduces manual work.";
 
-const personSchema = generatePersonSchema({
-  name: profile.name,
-  jobTitle: profile.title,
-  email: profile.email,
-  telephone: profile.phoneHref.replace("tel:", ""),
-  url: siteUrl,
-  sameAs: [profile.social.github, profile.social.linkedin],
-});
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteName,
-  url: siteUrl,
-  description,
-  author: { "@type": "Person", name: profile.name },
-};
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `${profile.shortName}: Websites & Business Systems`,
+    url: absoluteUrl("/"),
+    image: absoluteUrl(profile.photo),
+    email: profile.email,
+    telephone: profile.phoneHref.replace("tel:", ""),
+    address: { "@type": "PostalAddress", addressRegion: "Camarines Norte", addressCountry: "PH" },
+    areaServed: "Worldwide",
+    founder: { "@type": "Person", name: profile.name },
+    serviceType: [
+      "Website development",
+      "Landing page development",
+      "Booking and reservation systems",
+      "Lead capture automation",
+      "Custom business software",
+      "Workflow automation",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    jobTitle: profile.title,
+    url: absoluteUrl("/"),
+    sameAs: [profile.social.github, profile.social.linkedin],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="title" content={title} />
-        <meta name="description" content={description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="author" content={profile.name} />
-        <meta
-          name="keywords"
-          content="full-stack developer, software developer, React, Next.js, TypeScript, Node.js, Flutter, portfolio, Sean Niel Dizon, web developer, mobile developer, AI applications"
-        />
-        <link rel="canonical" href={siteUrl} />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={siteUrl} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:site_name" content={siteName} />
-        <meta property="og:image" content={`${siteUrl}/images/dizon-formal.jpg`} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content={`${profile.name} — ${profile.title}`} />
-        <meta property="og:locale" content="en_US" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={siteUrl} />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`${siteUrl}/images/dizon-formal.jpg`} />
-        <meta name="twitter:image:alt" content={`${profile.name} — ${profile.title}`} />
-
-        <meta name="robots" content="index, follow" />
-        <meta name="theme-color" content="#0b1220" />
-        <meta name="color-scheme" content="dark" />
-
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/images/dizon-formal.jpg" />
-      </Head>
-
-      <Script
-        id="person-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <Script
-        id="website-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-
-      <InteractiveBackground />
-      <div className="relative z-[2]">
-        <Navbar />
-        <main id="main-content" className="pt-14" role="main">
-          <Hero />
-          <About />
-          <Skills />
-          <Experience />
-          <Certifications />
-          <Projects />
-          <Achievements />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
-    </>
+    <Layout>
+      <Seo title={title} description={description} path="/" jsonLd={jsonLd} />
+      <Hero />
+      <Problems />
+      <Services />
+      <SelectedWork />
+      <CtaBand />
+      <Trust />
+      <Process />
+      <About />
+      <Capabilities />
+      <Faq />
+      <Contact />
+    </Layout>
   );
 }

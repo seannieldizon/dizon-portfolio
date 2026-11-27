@@ -1,19 +1,17 @@
 // lib/fonts.ts
-import { DM_Sans, Outfit } from "next/font/google";
+import { DM_Sans, Fraunces } from "next/font/google";
 
-// Body — readable, modern, not a default AI stack
-export const dmSans = DM_Sans({
+// Body & UI — kept from the previous site for continuity and readability.
+export const sans = DM_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-dm-sans",
-  preload: true,
+  variable: "--font-sans",
 });
 
-// Display — distinctive headings
-export const outfit = Outfit({
+// Display — an editorial serif with optical sizing, used for headlines only.
+export const display = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
-  variable: "--font-outfit",
-  preload: true,
+  variable: "--font-display",
+  axes: ["opsz"],
 });

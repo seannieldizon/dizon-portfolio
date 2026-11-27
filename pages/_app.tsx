@@ -1,44 +1,28 @@
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { dmSans, outfit } from "../lib/fonts";
+import { display, sans } from "../lib/fonts";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  // Links like "/#process" from another page: the Pages Router lands at the
+  // top of the new page, so scroll to the section once it has rendered.
   useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
-
-      const targetElement = document.querySelector(href);
-      if (!targetElement) return;
-
-      e.preventDefault();
-      const headerEl = document.querySelector("header");
-      const headerHeight = headerEl?.getBoundingClientRect().height ?? 0;
-      const top =
-        window.scrollY +
-        targetElement.getBoundingClientRect().top -
-        headerHeight -
-        8;
-      window.scrollTo({ top, behavior: "smooth" });
+    const onDone = (url: string) => {
+      const hash = url.split("#")[1];
+      if (!hash) return;
+      requestAnimationFrame(() => {
+        document.getElementById(decodeURIComponent(hash))?.scrollIntoView({ block: "start" });
+      });
     };
-
-    document.addEventListener("click", handleAnchorClick);
-    return () => document.removeEventListener("click", handleAnchorClick);
-  }, []);
+    router.events.on("routeChangeComplete", onDone);
+    return () => router.events.off("routeChangeComplete", onDone);
+  }, [router.events]);
 
   return (
-    <div className={`${dmSans.variable} ${outfit.variable} font-sans antialiased`}>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-400 focus:text-neutral-900 focus:rounded-lg focus:font-semibold focus:shadow-lg focus:outline-none focus:ring-4 focus:ring-primary-400/50"
-      >
-        Skip to main content
-      </a>
+    <div className={`${sans.variable} ${display.variable} font-sans`}>
       <Component {...pageProps} />
     </div>
   );
